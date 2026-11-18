@@ -13,6 +13,7 @@
   "customDomain": "",
   "language": "en-US",
   "previewMode": true,
+  "showPreviewBanner": false,
   "ogImage": "/assets/images/og/og-default.png",
 
   "contact": {

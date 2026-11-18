@@ -114,7 +114,7 @@ function header(ctx, pagePath) {
 }
 
 function previewBar(ctx) {
-  if (!ctx.site.previewMode) return '';
+  if (!ctx.site.previewMode || ctx.site.showPreviewBanner === false) return '';
   return `<div class="preview-bar" role="note">
   <div class="wrap preview-bar__inner">
     <p><strong>Preview draft</strong><span class="preview-bar__more"> · Not public yet. Highlighted notes are waiting on owner approval.</span></p>
@@ -138,7 +138,7 @@ function footer(ctx) {
     <div class="site-footer__base">
       <p>© ${new Date().getFullYear()} ${esc(site.name)} · Fort Worth, Texas</p>
       <p class="site-footer__verse">Phil. 4:19</p>
-      ${site.previewMode ? '<p>Preview draft · not indexed by search engines</p>' : ''}
+      ${site.previewMode && site.showPreviewBanner !== false ? '<p>Preview draft · not indexed by search engines</p>' : ''}
     </div>
   </div>
 </footer>`;

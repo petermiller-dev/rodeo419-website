@@ -12,8 +12,6 @@ I started Rodeo 419 for the kind of business owner who does excellent work and d
 
 My job is to close that gap. I spend most of the early time listening, because the best website copy usually comes out of the owner's own mouth. Then I build a site that says those things clearly, looks like it belongs to that business, and makes it easy for the right customer to get in touch.
 
-{{pending: A few sentences in your own words: your background, how long you've lived in the Fort Worth area, and what led you to this work.}}
-
 ## What you can expect from me {#expect}
 
 - **Plain English.** I'll explain what I'm doing and why, without the jargon.
@@ -32,8 +30,6 @@ People ask about the name, so here's the story.
 
 **419** is for Philippians 4:19.
 
-{{pending: The full text of Philippians 4:19 in your preferred translation.}}
-
 ## The foundation of the business {#faith}
 
 I'm Catholic, and my faith is the foundation of how I run this business. I don't put that on the website to sell anything. I put it here because it shapes how I work, and you should know who you're hiring.
@@ -42,4 +38,3 @@ In practice, it means I try to treat every client's business the way I'd want mi
 
 You don't have to share my faith to work with me. You can expect me to live up to it.
 
-{{pending: Confirm you're comfortable with this wording about your faith, or tell me how you'd like it said.}}

@@ -122,8 +122,6 @@ A website isn't finished at launch. Hours change, services change, you hire some
 
 Care can include keeping an eye on hosting and your domain, making text and photo updates, adding new pages or articles, keeping your Google Business Profile in step with your website, and a short check-in so we can plan what's next.
 
-{{pending: Care plan tiers and pricing are in the review checklist and need approval before they appear here.}}
-
 ::: gets What you get
 - Hosting and domain oversight
 - Text, photo, and page updates
