@@ -16,7 +16,7 @@
     "desktop": { "file": "about/headshot.jpg", "width": 1200, "height": 1500, "focal": "50% 32%" },
     "placeholder": "portrait",
     "decorative": false,
-    "alt": "Portrait of the owner of Rodeo 419 Marketing"
+    "alt": "AI-generated portrait of the owner of Rodeo 419 Marketing"
   },
   "about-land": {
     "label": "About: open land and fence line",
@@ -33,7 +33,7 @@
     "desktop": { "file": "services/working-session.jpg", "width": 1800, "height": 1200, "focal": "50% 50%" },
     "placeholder": "session",
     "decorative": false,
-    "alt": "Reviewing a website draft on a laptop with a business owner at their shop counter"
+    "alt": "AI-generated illustration of a website working session in a hotel lobby"
   },
   "cta-lights": {
     "label": "Contact band: arena lights at dusk",
