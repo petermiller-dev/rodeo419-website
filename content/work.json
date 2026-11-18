@@ -1,0 +1,262 @@
+{
+  "_readme": "Portfolio projects, in display order. 'featured' puts a project in the homepage sequence (order = featured value). 'published: false' keeps a project off the site entirely. 'status' is the label visitors see; keep it accurate (Preview, Concept, In progress, Launched). Screenshots live in assets/images/work/<slug>/<id>.webp and are captured with tools/capture-screenshots.mjs. 'colors' theme the project's own feature panel and case study.",
+  "projects": [
+    {
+      "slug": "dr-rainey",
+      "published": true,
+      "featured": 1,
+      "name": "Shane Rainey, DO",
+      "shortName": "Dr. Rainey",
+      "industry": "Integrative pediatrics",
+      "location": "Fort Worth, Texas",
+      "status": "Preview",
+      "statusNote": "Preview draft awaiting the client's review. Not yet launched.",
+      "previewUrl": "https://petermiller-dev.github.io/Doctor-Rainey/",
+      "summary": "A calm, editorial website for a Fort Worth pediatrician who looks at the whole child, built so parents can understand his approach and take the next step.",
+      "tags": [
+        "Messaging",
+        "Custom design",
+        "Website SEO",
+        "Content system"
+      ],
+      "colors": {
+        "bg": "#23362a",
+        "surface": "#f5efe3",
+        "ink": "#f5efe3",
+        "accent": "#d8b994"
+      },
+      "caseStudy": true,
+      "screenshots": [
+        {
+          "id": "home-desktop",
+          "label": "Homepage",
+          "device": "desktop",
+          "path": "",
+          "alt": "Dr. Rainey website homepage on desktop: a Texas oak landscape behind the headline “Thoughtful care for the whole child.”"
+        },
+        {
+          "id": "home-mobile",
+          "label": "Homepage",
+          "device": "mobile",
+          "path": "",
+          "alt": "Dr. Rainey website homepage on a phone, with the headline and Become a Patient button above the fold."
+        },
+        {
+          "id": "about-desktop",
+          "label": "About Dr. Rainey",
+          "device": "desktop",
+          "path": "about/",
+          "alt": "The About Dr. Rainey page on desktop, with an at-a-glance panel beside the biography."
+        },
+        {
+          "id": "care-mobile",
+          "label": "Pediatric Care",
+          "device": "mobile",
+          "path": "pediatric-care/",
+          "alt": "The Pediatric Care page on a phone, listing areas of care."
+        }
+      ]
+    },
+    {
+      "slug": "call-revere",
+      "published": true,
+      "featured": 2,
+      "name": "Call Revere",
+      "shortName": "Call Revere",
+      "industry": "Residential heating and air",
+      "location": "Irving, Texas",
+      "status": "Redesign preview",
+      "statusNote": "Redesign preview. Service availability is still being confirmed with the owner.",
+      "previewUrl": "https://petermiller-dev.github.io/callrevere-preview/",
+      "summary": "A redesign for an Irving heating and air company that connects what is going wrong at home to the right service, the right city, and a phone call.",
+      "tags": [
+        "Local SEO structure",
+        "Service pages",
+        "Symptom guides",
+        "Custom design"
+      ],
+      "colors": {
+        "bg": "#00193a",
+        "surface": "#f6f2eb",
+        "ink": "#f6f2eb",
+        "accent": "#e8a33d"
+      },
+      "caseStudy": true,
+      "screenshots": [
+        {
+          "id": "home-desktop",
+          "label": "Homepage",
+          "device": "desktop",
+          "path": "",
+          "alt": "Call Revere homepage on desktop: navy header, a call button, and the headline “Heating & Air Conditioning Service in Irving, TX.”"
+        },
+        {
+          "id": "home-mobile",
+          "label": "Homepage",
+          "device": "mobile",
+          "path": "",
+          "alt": "Call Revere homepage on a phone, with the call button visible at the top of the screen."
+        },
+        {
+          "id": "service-desktop",
+          "label": "AC Repair service page",
+          "device": "desktop",
+          "path": "services/ac-repair/",
+          "alt": "The AC Repair service page on desktop."
+        },
+        {
+          "id": "symptom-mobile",
+          "label": "Symptom guide: ice on AC lines",
+          "device": "mobile",
+          "path": "resources/ice-on-ac-lines/",
+          "alt": "The “Ice on your AC lines” guide on a phone."
+        }
+      ]
+    },
+    {
+      "slug": "verita-heritage",
+      "published": true,
+      "featured": 3,
+      "name": "Verita Heritage",
+      "shortName": "Verita Heritage",
+      "industry": "Family-made skincare",
+      "location": "Texas",
+      "status": "Design preview",
+      "statusNote": "Storefront design preview. Product photography shown on the preview is illustrative.",
+      "previewUrl": "https://petermiller-dev.github.io/verita-heritage-preview/",
+      "summary": "A storefront for a Texas family's small-batch tallow skincare that carries the warmth of their abuelita's remedies into product pages and guides.",
+      "tags": [
+        "Brand story",
+        "Product presentation",
+        "Guides",
+        "Custom design"
+      ],
+      "colors": {
+        "bg": "#16392c",
+        "surface": "#f9f5ed",
+        "ink": "#f9f5ed",
+        "accent": "#e2b3b9"
+      },
+      "caseStudy": true,
+      "screenshots": [
+        {
+          "id": "home-desktop",
+          "label": "Homepage",
+          "device": "desktop",
+          "path": "",
+          "alt": "Verita Heritage homepage on desktop with the headline “Care we grew up with.”"
+        },
+        {
+          "id": "home-mobile",
+          "label": "Homepage",
+          "device": "mobile",
+          "path": "",
+          "alt": "Verita Heritage homepage on a phone."
+        },
+        {
+          "id": "story-desktop",
+          "label": "Our Story",
+          "device": "desktop",
+          "path": "our-story/",
+          "alt": "The Verita Heritage “Our Story” page on desktop."
+        },
+        {
+          "id": "product-mobile",
+          "label": "Product page",
+          "device": "mobile",
+          "path": "product/tallow-balm-heritage/",
+          "alt": "A Verita Heritage product page on a phone."
+        }
+      ]
+    },
+    {
+      "slug": "obst-farm",
+      "published": true,
+      "featured": 0,
+      "name": "Obst Farm",
+      "shortName": "Obst Farm",
+      "industry": "Family farm: eggs and lamb",
+      "location": "Fort Worth, Texas",
+      "status": "Preview",
+      "statusNote": "Preview draft with illustrated photo placeholders until the family's own photographs are ready.",
+      "previewUrl": "https://petermiller-dev.github.io/family-farm-preview/",
+      "summary": "A three-page site for a Fort Worth family farm that answers the two questions customers ask first: what do you sell, and where do I get it?",
+      "tags": [
+        "Messaging",
+        "Custom design",
+        "Photography planning"
+      ],
+      "colors": {
+        "bg": "#23402f",
+        "surface": "#f6efe2",
+        "ink": "#f6efe2",
+        "accent": "#e0a27f"
+      },
+      "caseStudy": true,
+      "screenshots": [
+        {
+          "id": "home-desktop",
+          "label": "Homepage",
+          "device": "desktop",
+          "path": "",
+          "alt": "Obst Farm homepage on desktop with the headline “Local Eggs & Lamb from Our Family Farm.”"
+        },
+        {
+          "id": "home-mobile",
+          "label": "Homepage",
+          "device": "mobile",
+          "path": "",
+          "alt": "Obst Farm homepage on a phone."
+        },
+        {
+          "id": "pickup-desktop",
+          "label": "Pickup & Markets",
+          "device": "desktop",
+          "path": "pickup-and-markets/",
+          "alt": "The Obst Farm Pickup & Markets page on desktop."
+        }
+      ]
+    },
+    {
+      "slug": "charted-course",
+      "published": false,
+      "featured": 0,
+      "name": "Charted Course Health Insurance",
+      "shortName": "Charted Course",
+      "industry": "Independent health insurance plan reviews",
+      "location": "",
+      "status": "Preview",
+      "statusNote": "Preview. The callback form is disabled until the owner chooses a form service.",
+      "previewUrl": "https://petermiller-dev.github.io/charted-course-preview/",
+      "summary": "A focused site for an independent agent who reviews people's current health plans and tells them plainly whether to keep it.",
+      "tags": [
+        "Messaging",
+        "Single-offer site",
+        "Custom design"
+      ],
+      "colors": {
+        "bg": "#0f1f33",
+        "surface": "#f7f3ec",
+        "ink": "#f7f3ec",
+        "accent": "#e7b46a"
+      },
+      "caseStudy": false,
+      "screenshots": [
+        {
+          "id": "home-desktop",
+          "label": "Homepage",
+          "device": "desktop",
+          "path": "",
+          "alt": "Charted Course homepage on desktop: “Paying too much for your health insurance?” over a coastal photograph."
+        },
+        {
+          "id": "home-mobile",
+          "label": "Homepage",
+          "device": "mobile",
+          "path": "",
+          "alt": "Charted Course homepage on a phone."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "rodeo419-website",
+  "private": true,
+  "description": "Website for Rodeo 419 Marketing, web design and local SEO in Fort Worth, Texas",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "serve": "node scripts/serve.mjs",
+    "start": "node scripts/build.mjs && node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=18" }
+}

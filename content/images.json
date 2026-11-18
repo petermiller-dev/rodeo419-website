@@ -1,0 +1,47 @@
+{
+  "_readme": "Every photo slot on the site. To replace a placeholder, save the photo at the path in 'desktop.file' (and 'mobile.file' if listed) inside assets/images/, then rebuild. 'focal' is the CSS object-position for that crop. Leave 'alt' empty only when 'decorative' is true. PHOTO-GUIDE.md explains each slot in detail.",
+
+  "hero": {
+    "label": "Home hero: arena or open land at golden hour",
+    "page": "Home",
+    "desktop": { "file": "hero/home-hero-desktop.jpg", "width": 2400, "height": 1350, "focal": "64% 58%" },
+    "mobile": { "file": "hero/home-hero-mobile.jpg", "width": 1080, "height": 1440, "focal": "62% 55%" },
+    "placeholder": "arena",
+    "decorative": true,
+    "alt": ""
+  },
+  "about-headshot": {
+    "label": "Owner headshot",
+    "page": "About",
+    "desktop": { "file": "about/headshot.jpg", "width": 1200, "height": 1500, "focal": "50% 32%" },
+    "placeholder": "portrait",
+    "decorative": false,
+    "alt": "Portrait of the owner of Rodeo 419 Marketing"
+  },
+  "about-land": {
+    "label": "About: open land and fence line",
+    "page": "About",
+    "desktop": { "file": "about/fence-line-desktop.jpg", "width": 2400, "height": 1000, "focal": "50% 60%" },
+    "mobile": { "file": "about/fence-line-mobile.jpg", "width": 1080, "height": 1080, "focal": "40% 60%" },
+    "placeholder": "land",
+    "decorative": true,
+    "alt": ""
+  },
+  "services-working": {
+    "label": "Services: a working session with a business owner",
+    "page": "Services",
+    "desktop": { "file": "services/working-session.jpg", "width": 1800, "height": 1200, "focal": "50% 50%" },
+    "placeholder": "session",
+    "decorative": false,
+    "alt": "Reviewing a website draft on a laptop with a business owner at their shop counter"
+  },
+  "cta-lights": {
+    "label": "Contact band: arena lights at dusk",
+    "page": "Home, Contact",
+    "desktop": { "file": "cta/arena-lights-desktop.jpg", "width": 2400, "height": 900, "focal": "50% 40%" },
+    "mobile": { "file": "cta/arena-lights-mobile.jpg", "width": 1080, "height": 1350, "focal": "50% 35%" },
+    "placeholder": "lights",
+    "decorative": true,
+    "alt": ""
+  }
+}

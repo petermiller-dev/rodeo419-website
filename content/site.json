@@ -1,0 +1,35 @@
+{
+  "_readme": "Central site settings. Edit and rebuild. Contact details stay hidden until their 'verified' flag is true; only verified details are added to structured data. Turning previewMode off removes noindex, the preview banner and pending markers — only do that with explicit approval.",
+
+  "name": "Rodeo 419 Marketing",
+  "shortName": "Rodeo 419",
+  "tagline": "Web design and local SEO for Fort Worth small businesses",
+  "description": "Rodeo 419 Marketing builds websites and Google Business Profiles for Fort Worth–area small businesses, independent professionals, and family businesses.",
+  "city": "Fort Worth",
+  "region": "TX",
+  "areaServed": "Fort Worth, Texas and surrounding communities",
+
+  "siteUrl": "https://petermiller-dev.github.io/rodeo419-website",
+  "customDomain": "",
+  "language": "en-US",
+  "previewMode": true,
+  "ogImage": "/assets/images/og/og-default.png",
+
+  "contact": {
+    "email": "",
+    "phoneDisplay": "",
+    "phoneE164": ""
+  },
+  "verified": {
+    "email": false,
+    "phone": false
+  },
+
+  "nav": [
+    { "label": "Work", "href": "/work/" },
+    { "label": "Services", "href": "/services/" },
+    { "label": "Process", "href": "/process/" },
+    { "label": "About", "href": "/about/" }
+  ],
+  "navCta": { "label": "Contact", "href": "/contact/" }
+}
