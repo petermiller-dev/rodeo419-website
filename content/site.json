@@ -16,13 +16,13 @@
   "ogImage": "/assets/images/og/og-default.png",
 
   "contact": {
-    "email": "",
-    "phoneDisplay": "",
-    "phoneE164": ""
+    "email": "rodeo419marketing@gmail.com",
+    "phoneDisplay": "(570) 495-3710",
+    "phoneE164": "+15704953710"
   },
   "verified": {
-    "email": false,
-    "phone": false
+    "email": true,
+    "phone": true
   },
 
   "nav": [
