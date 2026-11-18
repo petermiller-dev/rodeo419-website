@@ -4,32 +4,32 @@ Every open decision for the site, in one place. Items marked **◇** also appear
 
 ## Before anyone outside sees it
 
-- [ ] **Client permission to feature their previews.** Confirm Dr. Rainey, Call Revere, Verita Heritage, and Obst Farm are each comfortable being shown as work samples while their sites are still previews. The Call Revere preview banner includes the owner's first name ("James").
+- [x] **Client permission to feature their previews.** Confirm Dr. Rainey, Call Revere, Verita Heritage, and Obst Farm are each comfortable being shown as work samples while their sites are still previews. The Call Revere preview banner includes the owner's first name ("James").
 - [ ] **Status labels.** Confirm each label: Dr. Rainey "Preview", Call Revere "Redesign preview", Verita Heritage "Design preview", Obst Farm "Preview". Change a label in `content/work.json` when a site launches.
 - [ ] **Charted Course.** Currently hidden (`"published": false` in `content/work.json`); see the note at the end of this file. Set it to `true` to add it to the Work page, and I'll write a case study if you want one.
 
 ## Identity and copy
 
 - [ ] **◇ Your name.** The site is written in the first person but never names the owner. Decide whether to name yourself on About, and in the headshot alt text and structured data.
-- [ ] **◇ About background.** A few sentences in your own words: your background, how long you've been in the Fort Worth area, what led you to this work (About → "How I work with local businesses").
-- [ ] **◇ Faith wording.** Confirm the "Foundation of the business" section says it the way you want.
+- [x] **◇ About background.** A few sentences in your own words: your background, how long you've been in the Fort Worth area, what led you to this work (About → "How I work with local businesses").
+- [x] **◇ Faith wording.** Confirm the "Foundation of the business" section says it the way you want.
 - [ ] **◇ Philippians 4:19.** Choose a translation (for example RSV-2CE, NABRE, or Douay-Rheims) and send the exact text. It goes on About under "The meaning of the name". Home cites the verse without quoting it; About also says the verse "is a reminder that the work is provided for". Confirm that reading.
-- [ ] **Wordmark.** The preview uses a typographic wordmark: RODEO in a condensed display face, 419 in a double-ruled "stamped" box, and MARKETING between fine rules. Options: keep it, try a version with 419 in rust on dark, or commission a drawn mark. The favicon is a simple 419 badge.
-- [ ] **Promises on the Contact page.** Confirm "I'll reply personally, usually within one business day", "first conversation by phone or in person around Fort Worth", and "Call or text" (do you accept texts?).
+- [x] **Wordmark.** The preview uses a typographic wordmark: RODEO in a condensed display face, 419 in a double-ruled "stamped" box, and MARKETING between fine rules. Options: keep it, try a version with 419 in rust on dark, or commission a drawn mark. The favicon is a simple 419 badge.
+- [x] **Promises on the Contact page.** Confirm "I'll reply personally, usually within one business day", "first conversation by phone or in person around Fort Worth", and "Call or text" (do you accept texts?).
 - [ ] **Service area wording.** The site says "Fort Worth and nearby communities". Name specific cities if you want them listed.
-- [ ] **Capabilities.** Confirm you offer everything described, especially photography coordination, ongoing article writing, and hosting/domain oversight.
+- [x] **Capabilities.** Confirm you offer everything described, especially photography coordination, ongoing article writing, and hosting/domain oversight.
 
 ## Contact details (needed before launch)
 
-- [ ] **◇ Email.** Send a verified address. Then fill `contact.email` and set `verified.email` to `true` in `content/site.json`. The Contact page gets a mailto link with a prefilled subject and prompts, and the address is added to structured data.
-- [ ] **◇ Phone.** Send a verified number. Fill `phoneDisplay` and `phoneE164` (`+1817…`) and set `verified.phone` to `true`. That adds tap-to-call and structured data.
+- [x] **◇ Email.** Send a verified address. Then fill `contact.email` and set `verified.email` to `true` in `content/site.json`. The Contact page gets a mailto link with a prefilled subject and prompts, and the address is added to structured data.
+- [x] **◇ Phone.** Send a verified number. Fill `phoneDisplay` and `phoneE164` (`+1817…`) and set `verified.phone` to `true`. That adds tap-to-call and structured data.
 - [ ] Decide whether you want a contact form later. Right now there is none, by design: no data is collected. A form would need a form service and an update to the Privacy page.
 
 ## Imagery (see PHOTO-GUIDE.md)
 
-- [ ] **Hero image.** Approve the arena-at-golden-hour direction (or open land), then shoot, license, or generate it using the prompts in the guide.
+- [x] **Hero image.** Approve the arena-at-golden-hour direction (or open land), then shoot, license, or generate it using the prompts in the guide.
 - [ ] **◇ Headshot.** Book a real photo of you; 1200 × 1500, 4:5.
-- [ ] **Contact band** (arena lights at dusk) and the **About band** (fence line).
+- [x] **Contact band** (arena lights at dusk) and **About band** (generated North Texas farmland and fence line).
 - [ ] **Working-session photo** for Services. It needs a real client's permission; remove the slot if it isn't ready.
 - [ ] Regenerate the social image after the hero is in place (`node tools/make-og.mjs`).
 
@@ -45,7 +45,7 @@ Every open decision for the site, in one place. Items marked **◇** also appear
 | **Care plan** | Hosting and domain oversight, monthly text and photo updates, quarterly check-in, profile kept in step with the site | $ ____ / month |
 | **Content add-on** | One or two articles a month written with your input | $ ____ / month |
 
-Decide: show prices, show "starting at" prices, or keep pricing for the first conversation.
+Pricing decision pending. Keep the current Services page and discuss public starting prices versus a tailored email proposal.
 
 ## Proof (add later, only with permission)
 
