@@ -287,6 +287,20 @@ em { font-style: italic; }
     radial-gradient(ellipse 20% 26% at 73% 66%, rgba(var(--dust), 0.7), transparent 70%);
   animation: dust-drift-near 38s linear -12s infinite, dust-gust-near 13s ease-in-out -6s infinite alternate;
 }
+/* First gust: one warm puff over the open dirt on the right, a little
+   stronger than the regular drift, so the dust reads in the first seconds.
+   Plays once (peaks around 2s), then the two looping layers take over. */
+.hero__dust::after {
+  content: ''; position: absolute; right: -6%; width: 62%; top: 34%; height: 62%;
+  background: radial-gradient(ellipse 50% 42% at 58% 62%, rgba(var(--dust), 0.95), rgba(var(--dust), 0.35) 45%, transparent 72%);
+  opacity: 0; pointer-events: none; will-change: transform, opacity;
+  animation: dust-first-gust 5.5s cubic-bezier(0.3, 0.5, 0.3, 1) 0.5s 1 both;
+}
+@keyframes dust-first-gust {
+  0% { opacity: 0; transform: translate3d(8%, 0, 0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translate3d(-14%, 0, 0); }
+}
 @keyframes dust-drift-far { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
 @keyframes dust-drift-near { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-33.3333%, 0, 0); } }
 @keyframes dust-gust-far { 0% { opacity: 0.4; } 55% { opacity: 0.85; } 100% { opacity: 0.5; } }
@@ -322,7 +336,8 @@ em { font-style: italic; }
   .hero__frame { height: max(380px, min(calc((100vw - 2 * var(--gutter)) * 4 / 3), calc(100svh - 250px))); }
   .hero__media img { object-position: var(--focal-m); transform-origin: var(--focal-m); }
   .hero__stitch { inset: 8px; }
-  .hero__dust { height: 66%; opacity: 0.26; }   /* ground starts higher in the phone crop, under the headline: keep it quieter */
+  .hero__dust { height: 66%; opacity: 0.26; }
+  .hero__dust::after { top: 18%; height: 50%; right: -10%; width: 58%; }   /* the phone crop's open dirt sits higher */   /* ground starts higher in the phone crop, under the headline: keep it quieter */
   .hero__dust-layer--far { animation-duration: 90s, 11s; }
   .hero__dust-layer--near { animation-duration: 50s, 15s; }
   .hero__copy { left: 22px; right: 22px; bottom: 26px; }
@@ -667,6 +682,7 @@ a.contact-line__value { text-decoration: underline; text-underline-offset: 0.18e
   .hero__drift { transform: none; }
   .js .hero__media img, .js .hero__line > span { animation: none; }
   .hero__dust-layer { animation: none !important; transform: none !important; }   /* still, faint dust */
+  .hero__dust::after { animation: none !important; opacity: 0 !important; }
   .feature { height: auto !important; }
   .feature__sticky { position: static !important; height: auto !important; padding-block: clamp(3.5rem, 8vw, 5rem) !important; }
   .feature__info, .feature__desk, .feature__phone { transform: none !important; opacity: 1 !important; }
