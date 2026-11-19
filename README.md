@@ -78,7 +78,8 @@ Open the Markdown file for the page, edit, rebuild (or just push).
 - **Pending note:** `{{pending: text}}` shows a highlighted "awaiting approval" note in preview and disappears in production.
 - **Photo:** a line with only `{{image: slot-id}}` places a photo slot; `{{band: slot-id}}` between sections places a full-width band.
 - **Screenshot** (case studies only): `{{shot: home-desktop}}`, using shot ids from `content/work.json`.
-- **Homepage:** the hero is in front matter. Body sections are marked `<!-- section: work -->`, `capabilities`, `process`, `name`, `contact`. The capability rows come from `services.md` and the process steps from `process.md`, so each is written once.
+- **Homepage:** the hero is in front matter. Body sections are marked `<!-- section: work -->`, `build`, `capabilities`, `process`, `name`, `contact`. In `build` ("Custom-coded websites built to load fast"), the `## ` heading and first paragraph form the section head, each `### ` point becomes a column, and the closing paragraph of links sits above the inquiry button. The capability rows come from `services.md` and the process steps from `process.md`, so each is written once.
+- **Process page comparison:** everything after `<!-- section: platforms -->` in `process.md` is the WordPress/Wix/Lovable comparison shown below the six steps (it is not a step). Keep each answer's sources linked at its end, and re-check the HTTP Archive figures and their month before changing them.
 
 ### Portfolio
 
@@ -108,7 +109,7 @@ Fonts are self-hosted in `assets/fonts/` (all SIL Open Font License): **Big Shou
 
 ## Motion and accessibility
 
-- **Hero:** the image (or placeholder) does a slow 14-second push-in and drifts up to 48px while scrolling. The motion stays inside the frame; the headline lines rise once, in under a second.
+- **Hero:** the image (or placeholder) does a slow 14-second push-in and drifts up to 48px while scrolling. The motion stays inside the frame; the headline lines rise once, in under a second. Two faint, warm dust layers (`.hero__dust`, pure CSS) drift sideways over the arena dirt and fade in gusts at different speeds. They sit above the photo's shade but below the stitch border and headline, ignore taps and clicks, are quieter on phones, and stand still for reduced motion.
 - **Featured work:** each project gets its own panel in its own colors. On large screens the panel is about 1¾ screens tall and its contents stay pinned (`position: sticky`) while the desktop screenshot settles and the phone rises, giving visitors time to look. Normal scrolling throughout; no scroll hijacking.
 - **Process:** a rust line grows with scroll and each step lights up as the line reaches it. Horizontal on wide screens, a vertical rail on phones.
 - All motion uses `transform` and `opacity`. **`prefers-reduced-motion`** shows the final composition with no movement.

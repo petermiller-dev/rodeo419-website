@@ -49,3 +49,25 @@ Summary: Updates, hosting oversight, and a regular check-in, if you want them.
 Your part: Send me changes as they come up: new hours, new services, new work worth showing.
 
 After launch, you can take the site over yourself or I can keep it up for you. Care plans cover updates, hosting oversight, keeping your Google profile in step with your website, and a periodic check-in on what to improve next.
+
+<!-- section: platforms -->
+
+## How this compares to WordPress, Wix, and Lovable {#platforms}
+
+Owners often ask why I don't build on a platform they've heard of. Each of these can produce a good website. Here's how they differ from a custom-coded site, with sources so you can check the details yourself.
+
+### What about WordPress?
+
+WordPress can be fast. With a caching plugin, it can save pages as static files and serve those to visitors. But how fast a WordPress site is depends on the individual build: the hosting, the caching setup, the theme, the plugins, and the images and scripts each page loads. In HTTP Archive's October 2026 mobile data, 49% of the WordPress sites it measured passed all three Core Web Vitals. That figure describes the sites measured, not what any one WordPress site will do. Sources: [WordPress caching documentation](https://developer.wordpress.org/advanced-administration/performance/cache/), [HTTP Archive CMS report](https://httparchive.org/reports/techreport/category?category=CMS).
+
+### What about Wix?
+
+Wix takes care of hosting and updates for you, and in HTTP Archive's October 2026 mobile data, 81% of the Wix sites it measured passed all three Core Web Vitals. Again, that describes the sites measured, not a prediction for yours. The bigger difference is where the site can live. A standard Wix site has to run on Wix's servers. Wix's Studio Two editor offers a beta export you can run on your own Node.js host, but the exported site still loads fonts and media from Wix and calls Wix services for business features, and some features can't be exported yet. Sources: [Wix: exporting or embedding your site](https://support.wix.com/en/article/exporting-or-embedding-your-wix-site-elsewhere), [Wix: host an exported site](https://dev.wix.com/docs/studio-two/code-your-site/export-your-site/host-an-exported-site-outside-wix), [Wix: about exporting](https://dev.wix.com/docs/studio-two/code-your-site/export-your-site/about-exporting-your-site-to-code), [HTTP Archive CMS report](https://httparchive.org/reports/techreport/category?category=CMS).
+
+### What about Lovable?
+
+Lovable builds web applications from written prompts. Since May 2026, new Lovable projects use TanStack Start, a full-stack React framework that can render pages on a server, run server-side functions, and connect to a database. That's a sensible foundation for an app with accounts and data. A local business marketing site usually needs less: a handful of pages that look the same to every visitor, built ahead of time as plain HTML and CSS, with a small script for the few features that need one. Lovable can prerender pages like that too, but they remain part of a React application that's built and deployed as one project. I build the lighter kind of site directly. Source: [Lovable: Building apps using TanStack Start](https://lovable.dev/blog/building-apps-using-tanstack-start).
+
+### Lab scores and field data
+
+The Core Web Vitals figures above are field data: measurements from real visits to those sites. A Lighthouse score is a lab test: one simulated page load under fixed settings. They answer different questions, so I keep them separate. When I share a Lighthouse score for my own work, I'll name the page, the date, and the test settings with it.

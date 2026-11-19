@@ -258,6 +258,39 @@ em { font-style: italic; }
 .hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: var(--focal); transform-origin: var(--focal); }
 .js .hero__media img { animation: hero-push 14s cubic-bezier(0.16, 0.6, 0.2, 1) both; }
 @keyframes hero-push { from { transform: scale(1.08); } to { transform: scale(1); } }
+/* Ground-level dust: two faint warm layers over the arena dirt that drift
+   sideways and fade at different speeds. They sit above the shade (so they
+   read at all) but below the stitch border and the headline. Each layer is a
+   repeating tile, so moving it by exactly one tile loops cleanly.
+   Decorative only: aria-hidden, no pointer events, transform/opacity only. */
+.hero__dust {
+  --dust: 236, 168, 110;   /* sunlit arena dirt */
+  position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 44%;
+  overflow: hidden; pointer-events: none; opacity: 0.4;
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 18%, #000 50%, transparent 78%);
+  mask-image: linear-gradient(to top, transparent 0%, #000 18%, #000 50%, transparent 78%);
+}
+.hero__dust-layer { position: absolute; top: 0; bottom: 0; left: 0; background-repeat: repeat-x; pointer-events: none; will-change: transform, opacity; }
+.hero__dust-layer--far {
+  width: 200%; background-size: 50% 100%; opacity: 0.5;
+  background-image:
+    radial-gradient(ellipse 18% 22% at 20% 60%, rgba(var(--dust), 0.85), transparent 70%),
+    radial-gradient(ellipse 26% 13% at 50% 70%, rgba(var(--dust), 0.75), transparent 70%),
+    radial-gradient(ellipse 15% 19% at 81% 56%, rgba(var(--dust), 0.8), transparent 70%),
+    linear-gradient(to top, rgba(var(--dust), 0.32), transparent 75%);
+  animation: dust-drift-far 70s linear infinite, dust-gust-far 9s ease-in-out -3s infinite alternate;
+}
+.hero__dust-layer--near {
+  width: 300%; background-size: 33.3333% 100%; opacity: 0.3;
+  background-image:
+    radial-gradient(ellipse 27% 20% at 30% 74%, rgba(var(--dust), 0.8), transparent 70%),
+    radial-gradient(ellipse 20% 26% at 73% 66%, rgba(var(--dust), 0.7), transparent 70%);
+  animation: dust-drift-near 38s linear -12s infinite, dust-gust-near 13s ease-in-out -6s infinite alternate;
+}
+@keyframes dust-drift-far { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
+@keyframes dust-drift-near { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-33.3333%, 0, 0); } }
+@keyframes dust-gust-far { 0% { opacity: 0.4; } 55% { opacity: 0.85; } 100% { opacity: 0.5; } }
+@keyframes dust-gust-near { 0% { opacity: 0.12; } 40% { opacity: 0.7; } 100% { opacity: 0.22; } }
 .hero__shade {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
@@ -289,6 +322,9 @@ em { font-style: italic; }
   .hero__frame { height: max(380px, min(calc((100vw - 2 * var(--gutter)) * 4 / 3), calc(100svh - 250px))); }
   .hero__media img { object-position: var(--focal-m); transform-origin: var(--focal-m); }
   .hero__stitch { inset: 8px; }
+  .hero__dust { height: 66%; opacity: 0.26; }   /* ground starts higher in the phone crop, under the headline: keep it quieter */
+  .hero__dust-layer--far { animation-duration: 90s, 11s; }
+  .hero__dust-layer--near { animation-duration: 50s, 15s; }
   .hero__copy { left: 22px; right: 22px; bottom: 26px; }
   .hero__title { font-size: clamp(2.5rem, 12.2vw, 4rem); }
   .hero__deck { grid-template-columns: 1fr; }
@@ -341,6 +377,22 @@ em { font-style: italic; }
 }
 
 /* 9. CAPABILITIES ---------------------------------------------------------- */
+/* How it's built (between featured work and capabilities) */
+.build { padding-bottom: clamp(4rem, 8vw, 7rem); }
+.build .section-head { padding-top: clamp(4rem, 9vw, 8rem); }
+.build__points { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(1.5rem, 3vw, 3rem); border-top: 2px solid var(--ink); }
+.build__point { padding-top: 1.4rem; border-top: 3px solid var(--rust); margin-top: -2px; max-width: 42ch; }
+.build__title { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.45rem, 2vw, 1.8rem); line-height: 1; margin: 0 0 0.7rem; }
+.build__point p { margin: 0; color: var(--muted); }
+.build__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem; margin-top: clamp(2.5rem, 4vw, 3.5rem); padding-top: 1.5rem; border-top: 1px solid var(--rule-strong); }
+.build__more { margin: 0; max-width: 62ch; color: var(--muted); }
+.build__more a { font-weight: 700; color: var(--rust-deep); text-underline-offset: 0.2em; }
+.build__more a:hover { color: var(--rust); }
+@media (max-width: 899px) {
+  .build__points { grid-template-columns: 1fr; border-top: 0; }
+  .build__point { max-width: none; margin-top: 0; padding-bottom: 1.6rem; }
+}
+
 .caps { padding-bottom: clamp(4rem, 8vw, 7rem); }
 .caps .section-head { padding-top: clamp(4rem, 9vw, 8rem); }
 .caps__list { list-style: none; padding: 0; margin: 0; border-top: 2px solid var(--ink); }
@@ -614,6 +666,7 @@ a.contact-line__value { text-decoration: underline; text-underline-offset: 0.18e
   .js [data-reveal] { opacity: 1; transform: none; }
   .hero__drift { transform: none; }
   .js .hero__media img, .js .hero__line > span { animation: none; }
+  .hero__dust-layer { animation: none !important; transform: none !important; }   /* still, faint dust */
   .feature { height: auto !important; }
   .feature__sticky { position: static !important; height: auto !important; padding-block: clamp(3.5rem, 8vw, 5rem) !important; }
   .feature__info, .feature__desk, .feature__phone { transform: none !important; opacity: 1 !important; }

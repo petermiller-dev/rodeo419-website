@@ -298,6 +298,7 @@ export function homePage(ctx, { fm, sections, featured, capabilities, steps }) {
     <div class="hero__frame" data-hero>
       <div class="hero__drift" data-hero-drift>${imageSlot(ctx, 'hero', { className: 'hero__media', eager: true, sizes: '100vw', guides: 'Motion: slow push-in from 108% to 100% over 14s, plus up to 48px drift while scrolling, inside the frame only', safe: 'hero' })}</div>
       <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__dust" aria-hidden="true"><span class="hero__dust-layer hero__dust-layer--far"></span><span class="hero__dust-layer hero__dust-layer--near"></span></div>
       <div class="hero__stitch" aria-hidden="true"></div>
       <div class="hero__copy">${h1}</div>
     </div>
@@ -342,10 +343,37 @@ export function homePage(ctx, { fm, sections, featured, capabilities, steps }) {
   <div class="wrap featured__more">${button(ctx, 'See all work', '/work/', 'ghost')}</div>
 </section>`;
 
+  // How the sites are built: h2 + intro in the head, each "### " point as a
+  // list item, and the closing paragraph of links above the inquiry button.
+  let build = '';
+  if (sections.build) {
+    const [head, ...rest] = sections.build.split(/(?=<h3[\s>])/);
+    const intro = head.replace(/<h2[^>]*>/, '<h2 id="build-title" class="section-title">');
+    const last = rest.length ? rest[rest.length - 1] : '';
+    const tailAt = last.search(/<\/p>\s*<p>/);
+    const points = tailAt === -1 ? rest : [...rest.slice(0, -1), last.slice(0, tailAt + 4)];
+    const more = tailAt === -1 ? '' : last.slice(tailAt + 4).trim();
+    build = `<section class="build" aria-labelledby="build-title">
+  <div class="wrap">
+    <div class="section-head section-head--split" data-reveal>
+      ${kicker('02', 'How it’s built')}
+      ${intro}
+    </div>
+    <ul class="build__points">
+      ${points.map((pt) => `<li class="build__point" data-reveal>${pt.replace(/<h3[^>]*>/, '<h3 class="build__title">')}</li>`).join('\n      ')}
+    </ul>
+    <div class="build__foot" data-reveal>
+      ${more.replace('<p>', '<p class="build__more">')}
+      <div class="actions">${button(ctx, fm.heroSecondaryLabel, fm.heroSecondaryHref, 'primary')}</div>
+    </div>
+  </div>
+</section>`;
+  }
+
   const caps = `<section class="caps" aria-labelledby="caps-title">
   <div class="wrap">
     <div class="section-head section-head--split" data-reveal>
-      ${kicker('02', 'Capabilities')}
+      ${kicker('03', 'Capabilities')}
       ${sections.capabilities.replace('<h2 id="what-i-do">', '<h2 id="caps-title" class="section-title">')}
     </div>
     <ol class="caps__list">
@@ -363,7 +391,7 @@ export function homePage(ctx, { fm, sections, featured, capabilities, steps }) {
   const process = `<section class="process" aria-labelledby="process-title">
   <div class="wrap">
     <div class="section-head section-head--split" data-reveal>
-      ${kicker('03', 'Process')}
+      ${kicker('04', 'Process')}
       ${sections.process.replace('<h2 id="how-we-ll-work-together">', '<h2 id="process-title" class="section-title">')}
     </div>
     ${processTimeline(ctx, steps)}
@@ -375,7 +403,7 @@ export function homePage(ctx, { fm, sections, featured, capabilities, steps }) {
   <div class="wrap name__inner">
     <div class="name__mark" aria-hidden="true" data-reveal><span class="name__419">419</span><span class="name__cite">Philippians 4:19</span></div>
     <div class="name__text prose" data-reveal>
-      ${kicker('04', 'The name')}
+      ${kicker('05', 'The name')}
       ${sections.name.replace('<h2 id="about-the-name">', '<h2 id="name-title" class="section-title">')}
       <p><a class="text-link" href="${ctx.url('/about/#the-name')}">Read the full story</a></p>
     </div>
@@ -385,7 +413,7 @@ export function homePage(ctx, { fm, sections, featured, capabilities, steps }) {
   const contactText = sections.contact.replace(/<h2[^>]*>.*?<\/h2>/, '').replace(/^<p>|<\/p>$/g, '').trim();
   const cta = ctaBand(ctx, { text: contactText.replace(/<\/?p>/g, ' ') });
 
-  return hero + work + caps + process + name + cta;
+  return hero + work + build + caps + process + name + cta;
 }
 
 /* ---------------------------------------------------------------------------

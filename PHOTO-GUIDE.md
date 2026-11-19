@@ -37,7 +37,7 @@ Every slot is defined once in [`content/images.json`](content/images.json). To s
 - **Horizon:** about **58% down** the frame.
 - **Desktop crop:** the 16:9 file is cropped to a shorter, wider frame, losing about 10% at the top and bottom. Keep important detail out of the top and bottom 10%.
 - **Phone crop:** a separate 3:4 file. Keep the sun and one light tower in the upper-middle (focal 62% 55%); the headline covers the bottom half.
-- **Motion:** a slow 14-second push-in (108% to 100%) when the page loads, plus up to 48px of vertical drift inside the frame while scrolling. Leave about 50px of expendable image at the top and bottom edges. The motion is turned off for visitors who prefer reduced motion.
+- **Motion:** a slow 14-second push-in (108% to 100%) when the page loads, plus up to 48px of vertical drift inside the frame while scrolling. Leave about 50px of expendable image at the top and bottom edges. The motion is turned off for visitors who prefer reduced motion. A faint warm dust layer drifts over the lower part of the frame (about the bottom 25–40% on desktop, more on phones), so keep the arena dirt or ground in that band.
 - **Alt text:** decorative (`alt=""`). The H1 says what the page is about.
 - **Avoid:** people, animals in close-up, readable signs, logos, sponsor banners, or anything that identifies a specific venue unless you have the rights to show it.
 

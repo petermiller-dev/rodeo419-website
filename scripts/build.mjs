@@ -86,6 +86,26 @@ function splitChapters(body, ctx) {
   return chapters;
 }
 
+/** The Process page's platform comparison: one "## Heading {#id}" followed by
+ *  short "### Question" answers, laid out like a chapter without a step number. */
+function platformsSection(ctx, src) {
+  if (!src.trim()) return '';
+  const html = renderMarkdown(src, ctx).html;
+  const h2 = html.match(/<h2 id="([^"]+)">([\s\S]*?)<\/h2>/);
+  if (!h2) throw new Error('process.md platforms section needs a "## Heading {#id}"');
+  const [, id, title] = h2;
+  const body = html.replace(h2[0], '').replace(/<h3 id="/g, `<h3 id="${id}-`);
+  return `<section class="chapter chapter--faq" id="${id}" aria-labelledby="${id}-title">
+  <div class="wrap chapter__inner">
+    <header class="chapter__head" data-reveal>
+      <p class="chapter__label">Common question</p>
+      <h2 id="${id}-title" class="chapter__title">${title}</h2>
+    </header>
+    <div class="chapter__body prose" data-reveal>${body}</div>
+  </div>
+</section>`;
+}
+
 const renderChapters = (ctx, chapters, opts) =>
   chapters.map((c) => (c.band
     ? `<div class="band" data-reveal>${imageSlot(ctx, c.band, { className: 'band__media', guides: 'Decorative band' })}</div>`
@@ -144,7 +164,10 @@ const featured = published.filter((p) => p.featured > 0).sort((a, b) => a.featur
 const caseProjects = published.filter((p) => p.caseStudy);
 
 const services = splitChapters(read('pages/services.md').body, makeCtx('/services/'));
-const steps = splitChapters(read('pages/process.md').body, makeCtx('/process/'));
+// Process: the steps come first; anything after <!-- section: platforms -->
+// is the platform comparison, shown below the steps (not a step itself).
+const [processSteps, processPlatforms = ''] = read('pages/process.md').body.split(/<!--\s*section:\s*platforms\s*-->/);
+const steps = splitChapters(processSteps, makeCtx('/process/'));
 
 // HOME -----------------------------------------------------------------------
 {
@@ -210,7 +233,7 @@ caseProjects.forEach((proj, i) => {
   const overview = `<section class="process process--page" aria-label="The six steps at a glance"><div class="wrap">${processTimeline(ctx, steps, { headingLevel: 0, link: true })}</div></section>`;
   write(p, layout(ctx, {
     title: data.title, description: data.description, pagePath: p, bodyClass: 'page-process',
-    body: pageHero(ctx, data, { num: '03' }) + overview + renderChapters(ctx, steps, { variant: 'chapter--step' }) + ctaBand(ctx, { text: 'The first step is a conversation. No pitch, no pressure, just an honest look at what would help.' }),
+    body: pageHero(ctx, data, { num: '03' }) + overview + renderChapters(ctx, steps, { variant: 'chapter--step' }) + platformsSection(ctx, processPlatforms) + ctaBand(ctx, { text: 'The first step is a conversation. No pitch, no pressure, just an honest look at what would help.' }),
     jsonLd: [breadcrumbLd([['Home', '/'], ['Process', p]])],
   }));
 }

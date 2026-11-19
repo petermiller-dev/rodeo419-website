@@ -16,6 +16,26 @@ heroSecondaryHref: /contact/
 
 A pediatrician, a heating and air company, and a family skincare business. Each one needed something different from its website, so each one looks and works differently. These are previews I've built with the owners; the labels say where each one stands.
 
+<!-- section: build -->
+
+## Custom-coded websites built to load fast
+
+I build local business websites with HTML and CSS, and I keep JavaScript to the features that need it. That gives me direct control over what loads on a phone, how the layout holds steady as photos come in, and how a visitor gets from the first page to a call or an inquiry. Your site can still have movement, strong photography, and a design that's clearly yours.
+
+### Built for the phone in your customer's hand
+
+Photos are cropped and sized for the screen they appear on, and each one has its space reserved before it arrives, so the text doesn't jump while the page loads.
+
+### Motion that never stands in the way
+
+On this site, one small script (under 3 KB compressed) runs the phone menu and the scroll motion in the hero, the featured work, and the process steps. If it doesn't run, every page still reads and every link still works. Visitors who turn on reduced motion get a still page.
+
+### A site you can take with you
+
+The finished site is a folder of plain files: HTML, CSS, images, and that one script. Any host that serves static files can run it, and your domain points wherever the site lives.
+
+See how the content system works in the [Dr. Rainey case study](/work/dr-rainey/#built), or read [how this compares to WordPress, Wix, and Lovable](/process/#platforms).
+
 <!-- section: capabilities -->
 
 ## What I do
