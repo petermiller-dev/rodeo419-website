@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { parseFrontMatter, renderMarkdown, slugify, inline } from './markdown.mjs';
 import {
   layout, pageHero, chapterList, processTimeline, contactLinks, ctaBand, homePage, workGrid, caseStudy,
-  imageSlot, shotFigure, button, insightsIndex, articlePage,
+  imageSlot, shotFigure, button, insightsIndex, articlePage, inquiryForm,
 } from './templates.mjs';
 import { coverSvg } from './covers.mjs';
 import { placeholderFiles } from './placeholders.mjs';
@@ -53,6 +53,10 @@ function makeCtx(pagePath, { absolute = false, project = null } = {}) {
       if (kind === 'image') {
         const slot = images[id];
         return `<figure class="figure figure--photo" data-reveal>${imageSlot(ctx, id, { sizes: '(min-width: 1000px) 60vw, 92vw' })}${slot.decorative ? '' : ''}</figure>`;
+      }
+      if (kind === 'form') {
+        if (id !== 'inquiry') throw new Error(`Unknown form "${id}"`);
+        return inquiryForm(ctx);
       }
       if (kind === 'shot') {
         // {{shot: id}} inside a case study, or {{shot: project/id}} anywhere.
@@ -152,7 +156,7 @@ function businessLd() {
     url: absUrl('/'),
     image: absUrl(site.ogImage),
     areaServed: { '@type': 'City', name: 'Fort Worth', containedInPlace: { '@type': 'State', name: 'Texas' } },
-    knowsAbout: ['Web design', 'Local search engine optimization', 'Google Business Profile', 'Website copywriting'],
+    knowsAbout: ['Market research', 'Website development', 'Web design', 'Search engine optimization', 'Local search', 'Google Business Profile', 'Content marketing'],
   };
   if (site.verified.email && site.contact.email) o.email = site.contact.email;
   if (site.verified.phone && site.contact.phoneE164) o.telephone = site.contact.phoneE164;
@@ -190,7 +194,7 @@ const steps = splitChapters(processSteps, makeCtx('/process/'));
   const capabilities = services.filter((s) => s.fields.Home === 'yes');
   write('/', layout(ctx, {
     title: data.title, description: data.description, pagePath: '/', bodyClass: 'page-home',
-    body: homePage(ctx, { fm: { ...data, heroTitleLines: 'Web design|and local SEO|for *Fort Worth*|small businesses' }, sections, featured, capabilities, steps }),
+    body: homePage(ctx, { fm: { ...data, heroTitleLines: 'Research-first|marketing for|*Fort Worth*|small businesses' }, sections, featured, capabilities, steps }),
     jsonLd: [businessLd(), { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: absUrl('/') }],
   }));
 }
@@ -295,7 +299,7 @@ for (const a of articles) {
   const { data } = read('pages/process.md');
   const p = '/process/';
   const ctx = makeCtx(p);
-  const overview = `<section class="process process--page" aria-label="The six steps at a glance"><div class="wrap">${processTimeline(ctx, steps, { headingLevel: 0, link: true })}</div></section>`;
+  const overview = `<section class="process process--page" aria-label="The stages at a glance"><div class="wrap">${processTimeline(ctx, steps, { headingLevel: 0, link: true })}</div></section>`;
   write(p, layout(ctx, {
     title: data.title, description: data.description, pagePath: p, bodyClass: 'page-process',
     body: pageHero(ctx, data, { num: '03' }) + overview + renderChapters(ctx, steps, { variant: 'chapter--step' }) + foundationSection(ctx, processFoundation) + ctaBand(ctx, { text: 'The first step is a conversation. No pitch, no pressure, just an honest look at what would help.' }),

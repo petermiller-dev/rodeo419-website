@@ -1,9 +1,9 @@
 ---
-title: Rodeo 419 Marketing | Web Design & Local SEO in Fort Worth
-description: I build websites and Google Business Profiles for Fort Worth small businesses, independent professionals, and family businesses that do good work and want it to show.
-heroEyebrow: Fort Worth, Texas · Web design · Local search
-heroTitle: Web design and local SEO for Fort Worth small businesses
-heroIntro: I help you figure out what makes customers choose you, build a website that shows it, and make it easier for people to find your business on Google Search and Maps.
+title: Rodeo 419 Marketing | Research-First Digital Marketing in Fort Worth
+description: Market research, website development, and search marketing for Fort Worth small businesses. I research how customers find you before recommending a plan.
+heroEyebrow: Fort Worth, Texas · Market research · Websites · Search
+heroTitle: Research-first marketing for Fort Worth small businesses
+heroIntro: Before I recommend a website or a marketing plan, I research how your customers look for what you sell and who they find instead. Then I build the website and the search work around what we learn.
 heroPrimaryLabel: See my work
 heroPrimaryHref: /work/
 heroSecondaryLabel: Talk about your business
@@ -28,7 +28,7 @@ Photos are cropped and sized for the screen they appear on, and each one has its
 
 ### Motion that never stands in the way
 
-On this site, one small script (under 3 KB compressed) runs the phone menu and the scroll motion in the hero, the featured work, and the process steps. If it doesn't run, every page still reads and every link still works. Visitors who turn on reduced motion get a still page.
+On this site, one small script (about 3 KB compressed) runs the phone menu, the scroll motion in the hero, the featured work, and the process steps, and the inquiry form on the Contact page. If it doesn't run, every page still reads and every link still works. Visitors who turn on reduced motion get a still page.
 
 ### A site you can take with you
 
@@ -40,13 +40,13 @@ See how the content system works in the [Dr. Rainey case study](/work/dr-rainey/
 
 ## What I do
 
-Most small business owners I talk to don't need more marketing. They need a website that explains what they do as well as they would in person, and a Google listing that sends the right people to it. That work falls into four parts.
+Most small business owners I talk to don't need more marketing. They need to know how customers look for what they sell, and to show up well in those places. The work falls into three parts, and research comes first.
 
 <!-- section: process -->
 
 ## How we'll work together
 
-You know your business. I know how websites and local search work. The process is set up so each of us does the part we're good at, and so you always know what comes next.
+You know your business. I know how research, websites, and search work. The five stages are set up so each of us does the part we're good at, and so you always know what comes next.
 
 <!-- section: name -->
 

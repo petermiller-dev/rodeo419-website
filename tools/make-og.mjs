@@ -36,8 +36,8 @@ body{width:1200px;height:630px;background:#1b1714;color:#f3eadb;font-family:B;po
 .meta{margin-top:20px;font-size:19px;letter-spacing:.2em;text-transform:uppercase;color:rgba(243,234,219,.8);font-weight:700}
 </style></head><body><div class="bg"></div><div class="shade"></div><div class="stitch"></div>
 <div class="c"><div class="wm"><div class="main">Rodeo<span class="num">419</span></div><div class="sub">Marketing</div></div>
-<p class="tag">Web design and local SEO for <em>Fort&nbsp;Worth</em> small businesses</p>
-<p class="meta">Fort Worth, Texas · Websites · Google Business Profile</p></div></body></html>`;
+<p class="tag">Research-first marketing for <em>Fort&nbsp;Worth</em> small businesses</p>
+<p class="meta">Market research · Websites · Search marketing</p></div></body></html>`;
 
 const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 1200, height: 630 } });

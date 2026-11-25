@@ -4,7 +4,7 @@
 // - one <h1>, a unique <title>, and a meta description on every page
 // - every <img> has an alt attribute
 // - preview mode: every page carries noindex and robots.txt allows crawling
-// - privacy: no third-party scripts, stylesheets, fonts, iframes or forms
+// - privacy: no third-party scripts, stylesheets, fonts, iframes, or forms that post to a server
 // - structured data parses as JSON
 // - the sitemap lists every page; Insights articles carry article metadata
 // - every photo slot is documented in PHOTO-GUIDE.md
@@ -46,7 +46,9 @@ for (const file of htmlFiles) {
   if (site.previewMode && !/<meta name="robots" content="noindex/.test(html)) problems.push(`${rel}: preview page without noindex`);
   if (!/<meta property="og:image" content="https:/.test(html)) problems.push(`${rel}: missing absolute og:image`);
   for (const m of html.matchAll(/<img\b[^>]*>/g)) if (!/\salt="/.test(m[0])) problems.push(`${rel}: <img> without alt: ${m[0].slice(0, 80)}`);
-  if (/<iframe|<form\b|<embed\b/i.test(html)) problems.push(`${rel}: contains an iframe, form or embed`);
+  if (/<iframe|<embed\b/i.test(html)) problems.push(`${rel}: contains an iframe or embed`);
+  // The only form allowed is one that opens the visitor's email app (action="mailto:").
+  for (const m of html.matchAll(/<form\b[^>]*>/gi)) if (!/\saction="mailto:[^"]+"/.test(m[0])) problems.push(`${rel}: form that doesn't use mailto: ${m[0].slice(0, 80)}`);
   for (const m of html.matchAll(/<(?:script|link)\b[^>]*(?:src|href)="(https?:)?\/\/(?!petermiller-dev\.github\.io)[^"]*"[^>]*>/g)) {
     if (!/rel="canonical"/.test(m[0])) problems.push(`${rel}: third-party resource ${m[0].slice(0, 100)}`);
   }

@@ -4,6 +4,7 @@
    - scroll reveals (IntersectionObserver)
    - hero drift, featured-work sequence, and process line (one rAF scroll loop)
    - the "Photo guides" toggle in the preview bar
+   - the Contact inquiry form, which opens the visitor's email app (no posting)
    Motion uses transform/opacity only and is skipped for prefers-reduced-motion.
    Nothing is stored in the browser. */
 (function () {
@@ -59,6 +60,47 @@
       var on = guides.getAttribute('aria-pressed') !== 'true';
       guides.setAttribute('aria-pressed', String(on));
       doc.classList.toggle('show-guides', on);
+    });
+  }
+
+  /* Inquiry form (Contact) ------------------------------------------------ */
+  // Nothing is posted: the answers become an email in the visitor's own email
+  // app. The browser's built-in validation runs before "submit" fires.
+  var inquiry = document.querySelector('[data-inquiry]');
+  if (inquiry) {
+    inquiry.hidden = false;
+    var status = inquiry.querySelector('[data-inquiry-status]');
+    var copyBox = inquiry.querySelector('[data-inquiry-copy]');
+    var copied = inquiry.querySelector('[data-inquiry-copied]');
+    var labelFor = function (el) {
+      var l = inquiry.querySelector('label[for="' + el.id + '"]');
+      return l ? l.firstChild.textContent.trim() : el.name;
+    };
+    inquiry.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var fields = inquiry.querySelectorAll('.inquiry__fields input, .inquiry__fields textarea');
+      var lines = [];
+      Array.prototype.forEach.call(fields, function (el) {
+        var v = el.value.trim();
+        lines.push(el.tagName === 'TEXTAREA' ? labelFor(el) + ':\n' + (v || '-') : labelFor(el) + ': ' + (v || '-'));
+      });
+      var biz = inquiry.querySelector('[name="business"]').value.trim();
+      var body = lines.join('\n\n') + '\n';
+      var href = 'mailto:' + inquiry.getAttribute('data-to') +
+        '?subject=' + encodeURIComponent('Inquiry from ' + (biz || 'a business owner')) +
+        '&body=' + encodeURIComponent(body);
+      copyBox.value = body;
+      inquiry.querySelector('[data-inquiry-again]').setAttribute('href', href);
+      copied.textContent = '';
+      status.hidden = false;
+      status.focus();
+      window.location.href = href;
+    });
+    inquiry.querySelector('[data-inquiry-copy-btn]').addEventListener('click', function () {
+      var done = function () { copied.textContent = 'Copied.'; };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(copyBox.value).then(done, function () { copyBox.select(); });
+      } else { copyBox.select(); try { document.execCommand('copy'); done(); } catch (err) { /* text stays selected */ } }
     });
   }
 

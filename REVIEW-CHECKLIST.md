@@ -29,7 +29,7 @@ Every open decision for the site, in one place. Items marked **◇** also appear
 
 - [x] **◇ Email.** Send a verified address. Then fill `contact.email` and set `verified.email` to `true` in `content/site.json`. The Contact page gets a mailto link with a prefilled subject and prompts, and the address is added to structured data.
 - [x] **◇ Phone.** Send a verified number. Fill `phoneDisplay` and `phoneE164` (`+1817…`) and set `verified.phone` to `true`. That adds tap-to-call and structured data.
-- [ ] Decide whether you want a contact form later. Right now there is none, by design: no data is collected. A form would need a form service and an update to the Privacy page.
+- [x] Contact form. The Contact page has an eight-question inquiry form that opens the visitor's email app with their answers addressed to you. Nothing is posted to a server, so no data is collected by the site. A form service could replace it later; that would need an account and a Privacy page update.
 
 ## Imagery (see PHOTO-GUIDE.md)
 
@@ -37,7 +37,7 @@ Every open decision for the site, in one place. Items marked **◇** also appear
 - [ ] **◇ Headshot.** Book a real photo of you; 1200 × 1500, 4:5.
 - [x] **Contact band** (arena lights at dusk) and **About band** (generated North Texas farmland and fence line).
 - [ ] **Working-session photo** for Services. It needs a real client's permission; remove the slot if it isn't ready.
-- [ ] Regenerate the social image after the hero is in place (`node tools/make-og.mjs`).
+- [x] Regenerate the social image after the hero is in place (`node tools/make-og.mjs`). Done with the research-first wording.
 
 ## Pricing and packages (not on the site until you approve)
 

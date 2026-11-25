@@ -216,7 +216,7 @@ const pairCallouts = (html) => html.replace(/(<aside class="callout callout--get
 
 export function chapterList(ctx, chapters, { variant = '' } = {}) {
   return chapters.map((c, i) => {
-    const feature = c.id === 'google-business-profile' ? ' chapter--feature' : '';
+    const feature = c.id === 'search-marketing' ? ' chapter--feature' : '';
     const part = c.fields['Your part'] ? `<aside class="your-part"><p class="your-part__label">Where you come in</p><p>${inline(c.fields['Your part'], ctx)}</p></aside>` : '';
     return `<section class="chapter${feature} ${variant}" id="${c.id}" aria-labelledby="${c.id}-title">
   <div class="wrap chapter__inner">
@@ -236,7 +236,7 @@ export function chapterList(ctx, chapters, { variant = '' } = {}) {
 --------------------------------------------------------------------------- */
 export function processTimeline(ctx, steps, { headingLevel = 3, link = true } = {}) {
   const h = headingLevel ? `h${headingLevel}` : 'p';
-  return `<div class="timeline" data-timeline>
+  return `<div class="timeline" data-timeline style="--steps:${steps.length}">
   <div class="timeline__track" aria-hidden="true"><span class="timeline__line" data-timeline-line></span></div>
   <ol class="timeline__steps">
     ${steps.map((s, i) => `<li class="timeline__step" data-step>
@@ -255,10 +255,8 @@ export function processTimeline(ctx, steps, { headingLevel = 3, link = true } = 
 export function contactLinks(ctx, { compact = false } = {}) {
   const { site } = ctx;
   const c = site.contact, v = site.verified;
-  const subject = encodeURIComponent('About my business');
-  const bodyTxt = encodeURIComponent('My business:\n\nMy current website (if any):\n\nWhat I want to improve:\n');
   const email = v.email && c.email
-    ? `<a class="contact-line__value" href="mailto:${attr(c.email)}?subject=${subject}&amp;body=${bodyTxt}">${esc(c.email)}</a>`
+    ? `<a class="contact-line__value" href="${attr(inquiryMailto(c.email))}">${esc(c.email)}</a>`
     : `<span class="contact-line__value contact-line__value--pending">Email address coming soon ${pending(ctx, 'Awaiting verified email')}</span>`;
   const phone = v.phone && c.phoneE164
     ? `<a class="contact-line__value" href="tel:${attr(c.phoneE164)}">${esc(c.phoneDisplay)}</a>`
@@ -378,14 +376,14 @@ export function homePage(ctx, { fm, sections, featured, capabilities, steps }) {
       ${sections.capabilities.replace('<h2 id="what-i-do">', '<h2 id="caps-title" class="section-title">')}
     </div>
     <ol class="caps__list">
-      ${capabilities.map((c, i) => `<li class="cap${c.id === 'google-business-profile' ? ' cap--gbp' : ''}" data-reveal>
+      ${capabilities.map((c, i) => `<li class="cap${c.id === 'search-marketing' ? ' cap--gbp' : ''}" data-reveal>
         <span class="cap__num" aria-hidden="true">${pad(i + 1)}</span>
         <h3 class="cap__title"><a href="${ctx.url('/services/#' + c.id)}">${esc(c.title)}</a></h3>
         <p class="cap__summary">${inline(c.fields.Summary, ctx)}</p>
         <span class="cap__arrow" aria-hidden="true"><svg viewBox="0 0 20 20" width="22" height="22"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>
       </li>`).join('\n      ')}
     </ol>
-    <p class="caps__also" data-reveal><span>Also</span> Website care plans, hosting oversight, and ongoing updates after launch. <a href="${ctx.url('/services/#care')}">About site care</a></p>
+    <p class="caps__also" data-reveal><span>Also</span> Care after launch: hosting oversight, updates, and small changes. <a href="${ctx.url('/services/#care')}">About site care</a></p>
   </div>
 </section>`;
 
@@ -579,4 +577,64 @@ export function articlePage(ctx, { a, html, headings, related, work }) {
   </div>
   ${workHtml || relatedHtml ? `<div class="article-more"><div class="wrap article-more__inner">${workHtml}${relatedHtml}</div></div>` : ''}
 </article>`;
+}
+
+/* ---------------------------------------------------------------------------
+   Inquiry form (Contact page, via {{form: inquiry}})
+   The form never posts anywhere: main.js turns the answers into an email in
+   the visitor's own email app, addressed to the verified business email.
+   Without JavaScript the form stays hidden and the same questions are shown
+   as a list with a prefilled email link.
+--------------------------------------------------------------------------- */
+export const INQUIRY_FIELDS = [
+  { id: 'name', label: 'Your name', auto: 'name' },
+  { id: 'email', label: 'Email', hint: 'So I can reply.', type: 'email', auto: 'email' },
+  { id: 'business', label: 'Business name', auto: 'organization' },
+  { id: 'website', label: 'Current website', hint: 'If you have one.', auto: 'url', optional: true, url: true },
+  { id: 'offer', label: 'Products or services', hint: 'What you sell, and the work that matters most to you.', area: true },
+  { id: 'market', label: 'Geographic market', hint: 'Where your customers are: a city, neighborhoods, or a service area.', wide: true },
+  { id: 'objective', label: 'Primary business objective', hint: 'What would make the next year a success?', area: true },
+  { id: 'challenge', label: 'Biggest marketing challenge', hint: "What isn't working, or what you haven't been able to figure out.", area: true },
+];
+
+export function inquiryMailto(to, { subject = 'About my business' } = {}) {
+  const body = INQUIRY_FIELDS.map((f) => `${f.label}${f.optional ? ' (if any)' : ''}:\n`).join('\n');
+  return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+export function inquiryForm(ctx) {
+  const { site } = ctx;
+  const to = site.verified.email && site.contact.email;
+  if (!to) return `<p>Email address coming soon. ${pending(ctx, 'Awaiting verified email')}</p>`;
+  const field = (f) => {
+    const id = `inq-${f.id}`;
+    const hint = f.hint ? `<span class="field__hint" id="${id}-hint">${esc(f.hint)}</span>` : '';
+    const common = `id="${id}" name="${f.id}"${f.auto ? ` autocomplete="${f.auto}"` : ''}${f.optional ? '' : ' required'}${f.hint ? ` aria-describedby="${id}-hint"` : ''}`;
+    const control = f.area
+      ? `<textarea ${common} rows="3" maxlength="600"></textarea>`
+      : `<input ${common} type="${f.type || 'text'}" maxlength="160"${f.url ? ' inputmode="url" spellcheck="false"' : ''}>`;
+    return `<div class="field${f.area || f.wide ? ' field--wide' : ''}"><label class="field__label" for="${id}">${esc(f.label)}${f.optional ? ' <span class="field__opt">(optional)</span>' : ''}</label>${hint}${control}</div>`;
+  };
+  return `<div class="inquiry-wrap">
+<form class="inquiry" action="mailto:${attr(to)}" method="post" enctype="text/plain" data-inquiry data-to="${attr(to)}" hidden>
+  <p class="inquiry__intro">All fields are required except your website.</p>
+  <div class="inquiry__fields">${INQUIRY_FIELDS.map(field).join('')}</div>
+  <div class="inquiry__actions">
+    <button class="btn btn--primary" type="submit"><span>Write the email</span><svg class="btn__arrow" aria-hidden="true" viewBox="0 0 20 20" width="18" height="18"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+    <p class="inquiry__note">This opens your email app with your answers in a message to ${esc(to)}. Nothing is sent until you press Send.</p>
+  </div>
+  <div class="inquiry__status" data-inquiry-status tabindex="-1" hidden>
+    <p class="inquiry__status-title">Your email app should be open with your message.</p>
+    <p>Check it, then press Send. If nothing opened, <a data-inquiry-again href="mailto:${attr(to)}">try opening it again</a>, or copy your message below and email it to <a href="mailto:${attr(to)}">${esc(to)}</a>.</p>
+    <label class="field__label" for="inq-copy">Your message</label>
+    <textarea id="inq-copy" rows="9" readonly data-inquiry-copy></textarea>
+    <p class="inquiry__copy"><button class="btn btn--ghost" type="button" data-inquiry-copy-btn><span>Copy message</span></button> <span class="inquiry__copied" data-inquiry-copied aria-live="polite"></span></p>
+  </div>
+</form>
+<div class="inquiry-fallback">
+  <p>Email me with a sentence or two on each of these:</p>
+  <ol>${INQUIRY_FIELDS.map((f) => `<li>${esc(f.label)}${f.optional ? ' (if you have one)' : ''}</li>`).join('')}</ol>
+  <p>${button(ctx, 'Write the email', inquiryMailto(to), 'primary')}</p>
+</div>
+</div>`;
 }

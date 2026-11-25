@@ -1,6 +1,6 @@
 ---
 title: Privacy | Rodeo 419 Marketing
-description: How the Rodeo 419 Marketing website handles your information. No analytics, trackers, cookies, forms, or embedded third-party services.
+description: How the Rodeo 419 Marketing website handles your information. No analytics, trackers, cookies, or embedded third-party services.
 eyebrow: Privacy
 h1: Privacy
 intro: Short version. This website doesn't track you, doesn't set cookies, and doesn't collect anything you type.
@@ -12,10 +12,10 @@ Nothing, directly. This website has:
 
 - **No analytics or tracking.** No Google Analytics, no advertising pixels, no session recording.
 - **No cookies.**
-- **No forms.** Nothing you type on this site is sent anywhere.
+- **Nothing you type is sent to this website.** The inquiry form on the Contact page doesn't send anything to this site or to any outside service. It opens your own email app with your answers filled in, and nothing is sent until you press Send in that app.
 - **No embedded third-party services.** No maps, videos, social media widgets, chat tools, or fonts loaded from other companies. Fonts and images are served from this site.
 
-The site uses one small script for the menu and animations. It doesn't store anything in your browser, and everything on the site works with it turned off.
+The site uses one small script for the menu, the animations, and the inquiry form. It doesn't store anything in your browser. Everything on the site works with it turned off; without it, the Contact page lists the same questions with a link to email me.
 
 ## Hosting {#hosting}
 

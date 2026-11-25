@@ -1,54 +1,59 @@
 ---
-title: Process | How a Website Project Works | Rodeo 419 Marketing
-description: From the first conversation to launch and ongoing care: what happens at each step of a Rodeo 419 website project and where you, the business owner, take part.
+title: Process | Research-First Website & Search Marketing | Rodeo 419 Marketing
+description: Five stages from first conversation to ongoing growth: discover, research, build, grow, and measure. What happens at each stage and where you take part.
 eyebrow: Process
-h1: Six steps from first conversation to a site you're proud of
-intro: You'll always know what's happening, what I need from you, and what comes next. Most of the work is on my side, but a few steps need you, and those are the ones that make the site sound like your business.
+h1: Five stages, with the research before the website
+intro: You'll always know what's happening, what I need from you, and what comes next. Research comes before any design, so the website and the search work are built on how your customers actually look for what you sell.
 ---
 
-## First conversation {#first-conversation}
+## Discover {#discover}
 
-Summary: We talk about your business, what's working, and what isn't. No pitch.
-Your part: Tell me about your business, your customers, and what's frustrating you about your website or Google listing. Have your current site handy if you have one.
+Summary: Understand your business, your customers, and what you want to achieve.
+Your part: Tell me about your business, your best customers, and what's working or frustrating. Share your current website and Google listing if you have them.
 
-We start with a conversation, by phone or in person around Fort Worth. I'll ask what you do, who your best customers are, how they usually find you, and what you'd like to change. If you have a website, we'll look at it together.
+<span id="first-conversation"></span><span id="discovery"></span>
 
-By the end, you'll know whether I'm the right fit and what I'd suggest. If I'm not the right fit, I'll tell you.
+We start with a conversation, by phone or in person around Fort Worth. I'll ask what you do, who your best customers are, how they usually find you, and what you'd like the next year to look like. If you have a website or a Google Business Profile, we'll look at them together.
 
-## Discovery {#discovery}
+By the end, you'll know whether I'm the right fit and what I'd suggest researching first. If I'm not the right fit, I'll tell you.
 
-Summary: I learn how your business earns trust and what customers ask before they buy.
-Your part: An hour or two of conversation, plus any photos, reviews, brochures, or notes you already have. Introduce me to anyone else who should weigh in.
+## Research {#research}
 
-This is where the messaging work happens. I'll ask the questions your customers ask, look at how competitors present themselves, review your Google Business Profile, and figure out which pages you need. You'll get a short summary of what I heard and a proposed site map before any design starts, so we agree on the plan.
+Summary: Investigate how customers search for what you offer, and which competitors they find.
+Your part: Answer questions about your services, prices, and service area. Share reviews, common customer questions, and access to Search Console or your Business Profile if you have them.
 
-## Design and copy {#design-and-copy}
+This is where the plan comes from. I look at the searches and questions behind what you sell, which businesses show up in Google Search and Maps for them in your area, and what their websites and listings do well or leave out. I also review your own website, Google profile, and reviews.
 
-Summary: I write the pages and design the site around them, with a photo plan to match.
-Your part: Review drafts when I send them. If we're planning photography, help schedule the shoot or take the photos on the list.
+You'll get a plain-English summary: what customers look for, where the competition is strong, where there's realistic room to grow, and what I'd recommend first. Research shows where opportunity is likely, not a guaranteed result, and I'll tell you when the evidence is thin.
 
-I write the copy and design the pages together, because each one shapes the other. You'll get a working preview, a real website you can open on your phone, not a static mockup. Every photo slot is planned and labeled so we know exactly what to shoot.
+## Build {#build}
 
-## Review {#review}
+Summary: Develop the website around the research, review it together, and launch.
+Your part: Review drafts and the working preview. Check facts, prices, hours, and anything with your name on it. Help with photos, and approve the launch.
 
-Summary: You click through the preview, mark what's wrong, and we refine it together.
-Your part: Read every page carefully. Check facts, prices, hours, and anything with your name on it. Tell me what doesn't sound like you.
+<span id="design-and-copy"></span><span id="review"></span><span id="launch"></span>
 
-You know your business better than I do, so this step matters. I'll give you a short checklist of open decisions, things like the details only you can confirm, and we'll go through the preview together. Then I make the changes and we look again until it's right.
+The research decides the pages: the services people search for, the questions they ask, and the areas you serve. I write the copy and design the pages together, because each one shapes the other, and you get a working preview you can open on your phone, not a static mockup.
 
-## Launch {#launch}
+We go through the preview together with a short checklist of the details only you can confirm, and I refine it until it's right. When you approve, I connect your domain, submit the sitemap, make sure your Google Business Profile points to the new site, and test everything again once it's live.
 
-Summary: We connect your domain, set up search basics, and make the site public.
-Your part: Approve the final version. Help me get access to your domain and Google Business Profile if I don't already have it.
+## Grow {#grow}
 
-When you approve the site, I connect your domain, turn on search indexing, submit the sitemap, and make sure your Google Business Profile points to the new site. I test it on phones and computers after it's live, not just before.
+Summary: Pursue the opportunities the research found, to increase your visibility.
+Your part: Send news, new work, photos, and the questions customers ask. Ask happy customers for reviews.
 
-## Ongoing care {#ongoing-care}
+<span id="ongoing-care"></span>
 
-Summary: Updates, hosting oversight, and a regular check-in, if you want them.
-Your part: Send me changes as they come up: new hours, new services, new work worth showing.
+After launch, the search work continues at a pace that fits your business and budget: new service and area pages where there's demand, articles that answer customers' questions, a Google Business Profile that stays accurate and active, and improvements to pages that aren't doing their job. Care for the site itself, such as updates, hosting oversight, and small changes, can be part of this stage.
 
-After launch, you can take the site over yourself or I can keep it up for you. Care plans cover updates, hosting oversight, keeping your Google profile in step with your website, and a periodic check-in on what to improve next.
+## Measure {#measure}
+
+Summary: Track how people find the business, and identify what to improve next.
+Your part: Tell me what you hear from customers: how they found you and what they asked. Keep Search Console and your Business Profile in your own name.
+
+Two free Google tools do much of the measuring, and neither needs a tracking script on your website. Search Console shows which searches your pages appear for and how often people click. Your Business Profile's performance report shows calls, direction requests, and website visits from your listing. Together with what customers tell you, that shows what's working.
+
+On a regular schedule, we look at the numbers, decide what to keep doing, and choose the next improvement. I'll report what the data shows, including when something didn't work.
 
 <!-- section: foundation -->
 

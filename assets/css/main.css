@@ -105,7 +105,7 @@ em { font-style: italic; }
 .prose ol > li { margin-bottom: 0.6em; padding-left: 0.3em; }
 .prose ol > li::marker { font-family: var(--font-display); font-weight: 800; color: var(--rust); }
 .prose strong { color: var(--ink); }
-.prose > p:first-child { font-size: 1.12em; }
+.prose > p:first-child, .prose > span[id]:empty + p { font-size: 1.12em; }
 
 .pending {
   display: inline; background: rgba(163, 64, 28, 0.1); color: var(--rust-deep);
@@ -466,7 +466,7 @@ em { font-style: italic; }
   .timeline { padding-top: 3.2rem; }
   .timeline__track { left: 0; right: 0; top: 10px; height: 2px; }
   .timeline__line { transform-origin: 0 50%; transform: scaleX(var(--line)); }
-  .timeline__steps { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.8rem; }
+  .timeline__steps { grid-template-columns: repeat(var(--steps, 6), minmax(0, 1fr)); gap: 1.8rem; }
   .timeline__marker { top: -3.2rem; left: 0; }
 }
 @media (max-width: 999px) {
@@ -736,6 +736,41 @@ a.contact-line__value { text-decoration: underline; text-underline-offset: 0.18e
 }
 @media (max-width: 599px) {
   .cover { aspect-ratio: 16 / 9; }
+}
+
+/* 15. INQUIRY FORM (Contact) -----------------------------------------------
+   Plain HTML fields; main.js turns the answers into an email. Without
+   JavaScript the form stays hidden and .inquiry-fallback shows instead.    */
+.inquiry-wrap { margin: 1.6rem 0 0.5rem; }
+.js .inquiry-fallback { display: none; }
+.inquiry__intro { font-size: 0.9rem; color: var(--muted); margin: 0 0 1.2rem; }
+.inquiry__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.3rem 1.4rem; align-items: end; }
+.field { display: flex; flex-direction: column; gap: 0.35rem; min-width: 0; }
+.field--wide { grid-column: 1 / -1; }
+.field__label { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); }
+.field__opt { font-family: var(--font-body); font-weight: 400; font-size: 0.8rem; letter-spacing: 0; text-transform: none; color: var(--muted); }
+.field__hint { font-size: 0.86rem; color: var(--muted); line-height: 1.4; }
+.inquiry input, .inquiry textarea {
+  width: 100%; min-height: 48px; padding: 0.7rem 0.85rem; font: inherit; font-size: 1rem; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--rule-strong); border-radius: 0; box-shadow: inset 0 2px 0 rgba(27, 23, 20, 0.04);
+}
+.inquiry textarea { resize: vertical; line-height: 1.5; }
+.inquiry input:hover, .inquiry textarea:hover { border-color: var(--ink); }
+.inquiry input:focus-visible, .inquiry textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-color: var(--ink); }
+.inquiry input:user-invalid, .inquiry textarea:user-invalid { border-color: var(--rust); border-width: 2px; }
+.inquiry__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 1.8rem; padding-top: 1.4rem; border-top: 2px solid var(--ink); }
+.inquiry__actions .btn { cursor: pointer; }
+.inquiry__note { margin: 0; flex: 1 1 18rem; font-size: 0.88rem; color: var(--muted); }
+.inquiry__status { margin-top: 1.8rem; padding: 1.2rem 1.4rem; background: var(--paper); border: 1px dashed var(--saddle); }
+.inquiry__status:focus { outline: 3px solid var(--focus); outline-offset: 3px; }
+.inquiry__status-title { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.5rem; }
+.inquiry__status textarea { margin-top: 0.4rem; font-size: 0.92rem; background: var(--cream); }
+.inquiry__copy { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; margin: 1rem 0 0; }
+.inquiry__copy .btn { cursor: pointer; }
+.inquiry__copied { font-weight: 700; color: var(--rust-deep); }
+@media (max-width: 599px) {
+  .inquiry__fields { grid-template-columns: 1fr; }
+  .inquiry__actions .btn { width: 100%; justify-content: space-between; }
 }
 
 /* 13. MOTION ---------------------------------------------------------------

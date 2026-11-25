@@ -1,16 +1,16 @@
 ---
 title: About | The Owner Behind Rodeo 419 Marketing, Fort Worth
-description: Rodeo 419 Marketing is a one-owner web design and local search business in the Fort Worth area, built on plain dealing and the Catholic faith behind its name.
+description: Rodeo 419 Marketing is a one-owner, research-first digital marketing business in the Fort Worth area, built on plain dealing and the Catholic faith behind its name.
 eyebrow: About
 h1: One owner, working directly with other owners
-intro: When you hire Rodeo 419, you work with me. I'm the one who asks the questions, writes the copy, designs the pages, and answers the phone when something needs fixing.
+intro: When you hire Rodeo 419, you work with me. I'm the one who does the research, writes the copy, designs the pages, and answers the phone when something needs fixing.
 ---
 
 ## How I work with local businesses {#approach}
 
 I started Rodeo 419 for the kind of business owner who does excellent work and doesn't have time to explain it online. A pediatrician who takes time to listen to parents. A heating and air company that gives honest second opinions. A family making skincare the way their grandmother taught them. They're good at what they do, and their websites weren't saying so.
 
-My job is to close that gap. I spend most of the early time listening, because the best website copy usually comes out of the owner's own mouth. Then I build a site that says those things clearly, looks like it belongs to that business, and makes it easy for the right customer to get in touch.
+My job is to close that gap. I spend the early time listening and researching: the best website copy usually comes out of the owner's own mouth, and the best plan comes from understanding how customers actually look for what the business sells. Then I build a site that says those things clearly, looks like it belongs to that business, and makes it easy for the right customer to get in touch, and I keep working on how the business shows up in search.
 
 ## What you can expect from me {#expect}
 

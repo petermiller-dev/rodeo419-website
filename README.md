@@ -1,6 +1,6 @@
 # Rodeo 419 Marketing: Website
 
-Website for **Rodeo 419 Marketing**, a Fort Worth–area web design and local search business.
+Website for **Rodeo 419 Marketing**, a research-first digital marketing business in the Fort Worth area: market research, website development, and search marketing.
 
 A fast static site with no frameworks and no runtime dependencies. Every page's text lives in a Markdown file under `content/`. A small Node build script turns it into plain HTML with shared templates, and GitHub Actions publishes the result to GitHub Pages. The setup follows the Doctor-Rainey site.
 
@@ -28,7 +28,7 @@ content/                     ← EDIT TEXT HERE
   insights/<slug>.md         One file per Insights article (the slug is the URL)
 assets/
   css/main.css               All styles. Colors, fonts and spacing are tokens at the top.
-  js/main.js                 Menu, reveals, hero drift, work sequence, process line (optional)
+  js/main.js                 Menu, reveals, hero drift, work sequence, process line, inquiry form (optional)
   fonts/                     Self-hosted fonts (no requests to Google)
   images/                    Photos, screenshots, favicon, social image
 scripts/
@@ -153,6 +153,6 @@ Every push to `main` runs `.github/workflows/pages.yml`: build → check → pub
 
 ## Privacy rules for this site
 
-- No analytics, trackers, cookies, forms, embedded maps or videos, or third-party fonts and scripts. `scripts/check.mjs` fails the build if a page loads a third-party script, stylesheet, iframe, or form.
+- No analytics, trackers, cookies, embedded maps or videos, or third-party fonts and scripts, and no form that posts to a server. The Contact page's inquiry form only opens the visitor's email app (`action="mailto:…"`). `scripts/check.mjs` fails the build if a page loads a third-party script, stylesheet, or iframe, or has a form that isn't `mailto:`.
 - If any of that changes, update `content/pages/privacy.md` first.
 - Never invent testimonials, results, credentials, or client claims. Never present stock or generated people as the owner or a client.

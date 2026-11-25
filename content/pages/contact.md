@@ -1,23 +1,19 @@
 ---
-title: Contact | Talk About Your Business | Rodeo 419 Marketing
-description: Tell Rodeo 419 Marketing what your business does, share your current website, and say what you'd like to improve. Fort Worth–area web design and local SEO.
+title: Contact | Tell Me About Your Business | Rodeo 419 Marketing
+description: Tell Rodeo 419 Marketing about your business, your market, and your goals. Research-first websites and search marketing for the Fort Worth area.
 eyebrow: Contact
 h1: Let's talk about your business
-intro: You don't need a plan or a budget figured out. Tell me what you do and what you'd like to improve, and I'll tell you honestly whether I can help and what I'd suggest.
+intro: You don't need a plan or a budget figured out. Tell me what you do, where your customers are, and what you'd like to change, and I'll tell you honestly whether I can help and what I'd research first.
 ---
 
-## What to include {#what-to-include}
+## Tell me about your business {#inquiry}
 
-A few sentences is plenty. These three things help me give you a useful answer:
+Eight short questions. A sentence or two for each is plenty, and if you'd rather talk it through, call or text instead.
 
-1. **What your business does,** and who your best customers are.
-2. **Your current website,** if you have one, and your Google Business Profile if you know where it is.
-3. **What you want to improve.** More calls? A site that works on phones? Showing up for a service you're not found for? Something that just feels off?
-
-If you'd rather talk it through, that's fine too. Most first conversations take about half an hour.
+{{form: inquiry}}
 
 ## What happens next {#next}
 
 I'll reply personally, usually within one business day. If it looks like a fit, we'll set up a first conversation by phone or in person around Fort Worth. If it doesn't, I'll tell you, and point you somewhere better if I can.
 
-There's no contact form on this site, and nothing you send goes through a third-party service. Email or call, and it comes straight to me.
+The form doesn't send anything through this website or any outside service. It opens your own email app with your answers filled in and addressed to me, so your message comes straight to me, and nothing is stored here.
