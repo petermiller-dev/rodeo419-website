@@ -9,8 +9,9 @@ import { fileURLToPath } from 'node:url';
 import { parseFrontMatter, renderMarkdown, slugify, inline } from './markdown.mjs';
 import {
   layout, pageHero, chapterList, processTimeline, contactLinks, ctaBand, homePage, workGrid, caseStudy,
-  imageSlot, shotFigure, button,
+  imageSlot, shotFigure, button, insightsIndex, articlePage,
 } from './templates.mjs';
+import { coverSvg } from './covers.mjs';
 import { placeholderFiles } from './placeholders.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -54,6 +55,13 @@ function makeCtx(pagePath, { absolute = false, project = null } = {}) {
         return `<figure class="figure figure--photo" data-reveal>${imageSlot(ctx, id, { sizes: '(min-width: 1000px) 60vw, 92vw' })}${slot.decorative ? '' : ''}</figure>`;
       }
       if (kind === 'shot') {
+        // {{shot: id}} inside a case study, or {{shot: project/id}} anywhere.
+        if (id.includes('/')) {
+          const [slug, shotId] = id.split('/');
+          const proj = work.projects.find((p) => p.slug === slug && p.published);
+          if (!proj) throw new Error(`{{shot: ${id}}}: no published project "${slug}"`);
+          return shotFigure(ctx, proj, shotId, { credit: true });
+        }
         if (!ctx.project) throw new Error(`{{shot: ${id}}} used outside a case study`);
         return shotFigure(ctx, ctx.project, id);
       }
@@ -115,12 +123,12 @@ const renderChapters = (ctx, chapters, opts) =>
     : chapterList(ctx, [c], opts).replace(/<span class="chapter__num" aria-hidden="true">\d+<\/span>/, `<span class="chapter__num" aria-hidden="true">${String(chapters.filter((x) => !x.band).indexOf(c) + 1).padStart(2, '0')}</span>`)
   )).join('\n');
 
-const pages = [];
-function write(pagePath, html) {
+const pages = []; // { path, lastmod } for the sitemap
+function write(pagePath, html, { lastmod } = {}) {
   const file = pagePath === '/404.html' ? path.join(OUT, '404.html') : path.join(OUT, pagePath, 'index.html');
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, html);
-  if (pagePath !== '/404.html') pages.push(pagePath);
+  if (pagePath !== '/404.html') pages.push({ path: pagePath, lastmod });
 }
 
 function copyDir(src, dest) {
@@ -215,6 +223,60 @@ caseProjects.forEach((proj, i) => {
   }));
 });
 
+// INSIGHTS -------------------------------------------------------------------
+// One Markdown file per article in content/insights/. "draft: true" keeps an
+// article off the site, out of the index, and out of the sitemap.
+const ISO = /^\d{4}-\d{2}-\d{2}$/;
+const articles = fs.readdirSync(path.join(CONTENT, 'insights')).filter((f) => f.endsWith('.md')).map((f) => {
+  const { data, body } = read(`insights/${f}`);
+  const slug = f.replace(/\.md$/, '');
+  for (const k of ['title', 'description', 'h1', 'dek', 'topic', 'number', 'published']) if (!data[k] && data[k] !== 0) throw new Error(`insights/${f}: missing "${k}"`);
+  if (!ISO.test(data.published) || (data.updated && !ISO.test(data.updated))) throw new Error(`insights/${f}: dates must be YYYY-MM-DD`);
+  const words = body.replace(/\{\{[^}]+\}\}|\]\([^)]*\)|[#>*_`:|-]/g, ' ').split(/\s+/).filter(Boolean).length;
+  return { ...data, slug, body, words, minutes: Math.max(1, Math.round(words / 225)), updated: data.updated || data.published };
+}).filter((a) => !a.draft).sort((a, b) => b.published.localeCompare(a.published) || b.number - a.number);
+
+const publisherLd = { '@type': 'Organization', name: site.name, url: absUrl('/') };
+{
+  const { data } = read('pages/insights.md');
+  const p = '/insights/';
+  const ctx = makeCtx(p);
+  write(p, layout(ctx, {
+    title: data.title, description: data.description, pagePath: p, bodyClass: 'page-insights',
+    body: pageHero(ctx, data, { num: '06' }) + insightsIndex(ctx, { articles }) + ctaBand(ctx, { text: 'Have a question about your own website or Google listing? Ask me directly. I’ll give you a straight answer.' }),
+    jsonLd: [{
+      '@context': 'https://schema.org', '@type': 'Blog', name: `${site.shortName} Insights`, description: data.description, url: absUrl(p), inLanguage: site.language, publisher: publisherLd,
+      blogPost: articles.map((a) => ({ '@type': 'BlogPosting', headline: a.h1, url: absUrl(`/insights/${a.slug}/`), datePublished: a.published, dateModified: a.updated })),
+    }, breadcrumbLd([['Home', '/'], ['Insights', p]])],
+  }), { lastmod: articles.reduce((m, a) => (a.updated > m ? a.updated : m), '') || undefined });
+}
+for (const a of articles) {
+  const p = `/insights/${a.slug}/`;
+  const ctx = makeCtx(p);
+  const { html, headings } = renderMarkdown(a.body, ctx);
+  const related = (a.related?.length ? a.related.map((s) => articles.find((x) => x.slug === s) || (() => { throw new Error(`insights/${a.slug}: unknown related "${s}"`); })()) : articles.filter((x) => x !== a)).slice(0, 3);
+  const workLinks = (a.work || []).map((line) => {
+    const [ref, note = ''] = String(line).split(/\s*\|\s*/);
+    const [slug, anchor] = ref.split('#');
+    const project = work.projects.find((x) => x.slug === slug && x.published && x.caseStudy);
+    if (!project) throw new Error(`insights/${a.slug}: no published case study "${slug}"`);
+    return { project, anchor, note };
+  });
+  write(p, layout(ctx, {
+    title: a.title, description: a.description, pagePath: p, bodyClass: 'page-article',
+    ogType: 'article',
+    headExtra: `\n<meta property="article:published_time" content="${a.published}">\n<meta property="article:modified_time" content="${a.updated}">\n<meta property="article:section" content="${a.topic}">`,
+    body: articlePage(ctx, { a, html, headings, related, work: workLinks }) + ctaBand(ctx, { text: 'If this raised a question about your own website, I’m glad to look at it with you. No pitch, just a straight answer.' }),
+    jsonLd: [{
+      '@context': 'https://schema.org', '@type': 'BlogPosting', headline: a.h1, description: a.description,
+      datePublished: a.published, dateModified: a.updated, author: publisherLd, publisher: publisherLd,
+      image: absUrl(site.ogImage), url: absUrl(p), mainEntityOfPage: { '@type': 'WebPage', '@id': absUrl(p) },
+      articleSection: a.topic, wordCount: a.words, inLanguage: site.language,
+      isPartOf: { '@type': 'Blog', name: `${site.shortName} Insights`, url: absUrl('/insights/') },
+    }, breadcrumbLd([['Home', '/'], ['Insights', '/insights/'], [a.h1, p]])],
+  }), { lastmod: a.updated });
+}
+
 // SERVICES -------------------------------------------------------------------
 {
   const { data } = read('pages/services.md');
@@ -294,12 +356,15 @@ copyDir(path.join(ROOT, 'assets'), path.join(OUT, 'assets'));
 const phDir = path.join(OUT, 'assets/images/placeholders');
 fs.mkdirSync(phDir, { recursive: true });
 for (const [name, svg] of Object.entries(placeholderFiles(images))) fs.writeFileSync(path.join(phDir, name), svg);
+const coverDir = path.join(OUT, 'assets/images/insights');
+fs.mkdirSync(coverDir, { recursive: true });
+for (const a of articles) fs.writeFileSync(path.join(coverDir, `${a.slug}.svg`), coverSvg(a.cover, a.coverTone));
 
 /* Sitemap & robots --------------------------------------------------------- */
 const today = new Date().toISOString().slice(0, 10);
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map((p) => `  <url><loc>${absUrl(p)}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
+${pages.map((p) => `  <url><loc>${absUrl(p.path)}</loc><lastmod>${p.lastmod || today}</lastmod></url>`).join('\n')}
 </urlset>
 `);
 // Crawling stays allowed in preview so search engines can read each page's

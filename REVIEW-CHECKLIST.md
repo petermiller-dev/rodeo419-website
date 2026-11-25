@@ -19,6 +19,12 @@ Every open decision for the site, in one place. Items marked **◇** also appear
 - [ ] **Service area wording.** The site says "Fort Worth and nearby communities". Name specific cities if you want them listed.
 - [x] **Capabilities.** Confirm you offer everything described, especially photography coordination, ongoing article writing, and hosting/domain oversight.
 
+## Insights
+
+- [ ] **Review the three articles** (Who really owns your website?, The hidden costs of website maintenance, Why website speed matters). Every quote and figure links to its source; sources were checked in November 2026.
+- [ ] **Byline.** Articles are credited to Rodeo 419 Marketing. If you decide to name yourself on About, the byline can name you too.
+- [ ] **Ownership article.** It explains U.S. copyright basics and says it isn't legal advice. Consider having your attorney glance at it, and decide what your own contracts say about who owns the finished site.
+
 ## Contact details (needed before launch)
 
 - [x] **◇ Email.** Send a verified address. Then fill `contact.email` and set `verified.email` to `true` in `content/site.json`. The Contact page gets a mailto link with a prefilled subject and prompts, and the address is added to structured data.

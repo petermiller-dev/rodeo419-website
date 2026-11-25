@@ -6,6 +6,7 @@
 // - preview mode: every page carries noindex and robots.txt allows crawling
 // - privacy: no third-party scripts, stylesheets, fonts, iframes or forms
 // - structured data parses as JSON
+// - the sitemap lists every page; Insights articles carry article metadata
 // - every photo slot is documented in PHOTO-GUIDE.md
 //   node scripts/check.mjs
 import fs from 'node:fs';
@@ -73,6 +74,22 @@ for (const file of htmlFiles) {
       if (!fs.existsSync(target)) { problems.push(`${rel}: broken link → ${url}`); continue; }
       if (hash && !(target === file ? ids : idsOf(fs.readFileSync(target, 'utf8'))).has(hash)) problems.push(`${rel}: missing anchor #${hash} in ${url}`);
     }
+  }
+}
+
+// Sitemap lists every built page (except 404); Insights articles carry article metadata.
+const sitemapXml = fs.existsSync(path.join(OUT, 'sitemap.xml')) ? fs.readFileSync(path.join(OUT, 'sitemap.xml'), 'utf8') : '';
+for (const file of htmlFiles) {
+  const rel = path.relative(OUT, file);
+  if (rel === '404.html') continue;
+  const loc = site.siteUrl + '/' + rel.replace(/index\.html$/, '');
+  if (!sitemapXml.includes(`<loc>${loc}</loc>`)) problems.push(`sitemap.xml is missing ${loc}`);
+  if (/^insights\/[^/]+\/index\.html$/.test(rel)) {
+    const html = fs.readFileSync(file, 'utf8');
+    if (!/"@type":"BlogPosting"/.test(html)) problems.push(`${rel}: missing BlogPosting structured data`);
+    if (!/"@type":"BreadcrumbList"/.test(html)) problems.push(`${rel}: missing BreadcrumbList structured data`);
+    if (!/<meta property="og:type" content="article">/.test(html)) problems.push(`${rel}: og:type should be article`);
+    if (!/<nav class="crumbs" aria-label="Breadcrumb">/.test(html)) problems.push(`${rel}: missing visible breadcrumb`);
   }
 }
 

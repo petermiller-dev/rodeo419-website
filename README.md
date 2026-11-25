@@ -24,6 +24,8 @@ content/                     ← EDIT TEXT HERE
   pages/process.md           Process (one "## " section per step)
   pages/about.md, contact.md, privacy.md, work.md, 404.md
   work/<project>.md          One file per case study (matches a slug in work.json)
+  pages/insights.md          Insights landing page (front matter only)
+  insights/<slug>.md         One file per Insights article (the slug is the URL)
 assets/
   css/main.css               All styles. Colors, fonts and spacing are tokens at the top.
   js/main.js                 Menu, reveals, hero drift, work sequence, process line (optional)
@@ -34,6 +36,7 @@ scripts/
   templates.mjs              Shared layout, header, footer, page compositions
   markdown.mjs               Tiny Markdown renderer
   placeholders.mjs           Tonal placeholder images for photo slots without a photo
+  covers.mjs                 Small decorative SVG covers for Insights articles
   check.mjs                  Links, anchors, headings, titles, alt text, noindex, privacy checks
   serve.mjs                  Local server that mimics the GitHub Pages subpath
 tools/                       Optional helpers (need Playwright; not part of the build)
@@ -90,6 +93,23 @@ Open the Markdown file for the page, edit, rebuild (or just push).
 - `status` / `statusNote` are the labels visitors see. Keep them accurate: Preview, Concept, In progress, Launched.
 - `colors` theme each project's panel and case study (`bg`, `ink` for text on `bg`, `accent`).
 - `caseStudy: true` needs a matching `content/work/<slug>.md`.
+
+### Insights (articles)
+
+Each article is one Markdown file in `content/insights/`. The file name is the URL: `who-owns-your-website.md` → `/insights/who-owns-your-website/`. Publishing is the same as any other edit: push to `main`. The landing page, related links, sitemap, and structured data update automatically.
+
+Front matter:
+
+- `title` (browser tab and search result), `description` (50–160 characters), `h1`, `dek` (the standfirst under the headline)
+- `topic` (e.g. Ownership), `number` (the issue number shown on the cover)
+- `published` and optional `updated`, as `YYYY-MM-DD`. `updated` drives the sitemap date and the "Updated" line.
+- `cover` (`fence`, `rings`, or `wind`) and `coverTone` (`saddle`, `ink`, or `rust`)
+- `takeaways`: a short list shown as "The short version"
+- `related`: other article slugs (defaults to the newest others)
+- `work`: case studies to link, one per line as `slug#anchor | why it's relevant`
+- `draft: true` keeps an article off the site and out of the sitemap
+
+In the body, use `## Heading {#id}` for sections (they form the "In this article" list), `::: note` for a callout, and `{{shot: project/shot-id}}` to show a portfolio screenshot. End with `## Sources {#sources}` as a numbered list, and link every factual claim to its source. Quote sources exactly, and say where the evidence stops.
 
 ### Contact details
 

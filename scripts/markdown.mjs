@@ -6,6 +6,7 @@
 //   ::: note | pending | callout        → styled aside (closed by :::)
 //   {{image: slot-id}}                  → photo slot from content/images.json
 //   {{shot: shot-id}}                   → portfolio screenshot (case studies)
+//   {{shot: project/shot-id}}           → another project's screenshot (Insights)
 //   {{pending: text to be supplied}}    → inline "needs approval" marker
 //                                         (shown only while previewMode is on)
 //
@@ -79,7 +80,7 @@ export function renderMarkdown(src, ctx = {}) {
   const flushPara = (buf) => {
     if (!buf.length) return;
     const text = buf.join(' ').trim();
-    const dir = text.match(/^\{\{(image|shot):\s*([a-z0-9-]+)\s*\}\}$/);
+    const dir = text.match(/^\{\{(image|shot):\s*([a-z0-9/-]+)\s*\}\}$/);
     if (dir) html.push(ctx.directive ? ctx.directive(dir[1], dir[2]) : '');
     else html.push(`<p>${inline(text, ctx)}</p>`);
     buf.length = 0;

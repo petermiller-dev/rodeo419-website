@@ -84,10 +84,11 @@ export function device(ctx, project, shot, opts = {}) {
   return `<div class="device device--phone ${opts.className || ''}"><div class="device__screen">${shotImg(ctx, project, shot, opts)}</div></div>`;
 }
 
-export function shotFigure(ctx, project, shotId) {
+export function shotFigure(ctx, project, shotId, { credit = false } = {}) {
   const shot = project.screenshots.find((s) => s.id === shotId);
   if (!shot) throw new Error(`Unknown screenshot ${project.slug}/${shotId}`);
-  return `<figure class="shot shot--${shot.device}" data-reveal>${device(ctx, project, shot)}<figcaption><span>${esc(shot.label)}</span> · ${shot.device === 'desktop' ? 'Desktop' : 'Phone'}</figcaption></figure>`;
+  const who = credit ? `<span>${esc(project.name)}</span> · ${esc(shot.label)}` : `<span>${esc(shot.label)}</span>`;
+  return `<figure class="shot shot--${shot.device}" data-reveal>${device(ctx, project, shot)}<figcaption>${who} · ${shot.device === 'desktop' ? 'Desktop' : 'Phone'}</figcaption></figure>`;
 }
 
 const statusChip = (p) => `<span class="status"><span class="status__dot" aria-hidden="true"></span>${esc(p.status)}</span>`;
@@ -144,7 +145,7 @@ function footer(ctx) {
 </footer>`;
 }
 
-export function layout(ctx, { title, description, body, pagePath, bodyClass = '', jsonLd = [], ogImage }) {
+export function layout(ctx, { title, description, body, pagePath, bodyClass = '', jsonLd = [], ogImage, ogType = 'website', headExtra = '' }) {
   const { site } = ctx;
   const canonical = site.siteUrl + (pagePath === '/404.html' ? '/404.html' : pagePath);
   const og = site.siteUrl + (ogImage || site.ogImage);
@@ -158,7 +159,7 @@ export function layout(ctx, { title, description, body, pagePath, bodyClass = ''
 <meta name="description" content="${attr(description)}">
 ${site.previewMode ? '<meta name="robots" content="noindex">\n' : ''}<link rel="canonical" href="${attr(canonical)}">
 <meta name="theme-color" content="#1b1714">
-<meta property="og:type" content="website">
+<meta property="og:type" content="${ogType}">${headExtra}
 <meta property="og:site_name" content="${attr(site.name)}">
 <meta property="og:title" content="${attr(title)}">
 <meta property="og:description" content="${attr(description)}">
@@ -485,5 +486,97 @@ export function caseStudy(ctx, { project: p, fm, chapters, next }) {
       <a class="text-link" href="${ctx.url('/work/')}">All work</a>
     </div>
   </nav>
+</article>`;
+}
+
+/* ---------------------------------------------------------------------------
+   INSIGHTS: editorial articles (content/insights/*.md)
+--------------------------------------------------------------------------- */
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+export const formatDate = (iso) => { const [y, m, d] = String(iso).split('-').map(Number); return `${MONTHS[m - 1]} ${d}, ${y}`; };
+const issue = (a) => `No. ${pad(a.number)}`;
+const time = (iso) => `<time datetime="${attr(iso)}">${formatDate(iso)}</time>`;
+
+/** Byline: publisher, dates and reading time. "Updated" only when it differs. */
+function dateline(a, { compact = false } = {}) {
+  const updated = a.updated && a.updated !== a.published ? `<span>Updated ${time(a.updated)}</span>` : '';
+  return `<p class="dateline${compact ? ' dateline--compact' : ''}">${compact ? '' : '<span>Rodeo 419 Marketing</span>'}<span>${time(a.published)}</span>${updated}<span>${a.minutes} min read</span></p>`;
+}
+
+/** Decorative cover (SVG drawn at build time) with the issue number laid over it. */
+function cover(ctx, a, { eager = false, className = '' } = {}) {
+  return `<div class="cover cover--${attr(a.coverTone || 'ink')} ${className}"><img src="${ctx.url(`/assets/images/insights/${a.slug}.svg`)}" width="1600" height="700" alt="" loading="${eager ? 'eager' : 'lazy'}" decoding="async"${eager ? ' fetchpriority="high"' : ''}><span class="cover__num" aria-hidden="true">${pad(a.number)}</span></div>`;
+}
+
+export function insightsIndex(ctx, { articles }) {
+  const [lead, ...rest] = articles;
+  const leadHtml = lead ? `<article class="insight-lead" aria-labelledby="lead-${lead.slug}">
+    <a class="insight-lead__media" href="${ctx.url(`/insights/${lead.slug}/`)}" tabindex="-1" aria-hidden="true">${cover(ctx, lead, { eager: true })}</a>
+    <div class="insight-lead__text">
+      <p class="insight-meta"><span class="insight-meta__topic">${esc(lead.topic)}</span><span>${issue(lead)}</span><span>Latest</span></p>
+      <h2 class="insight-lead__title" id="lead-${lead.slug}"><a href="${ctx.url(`/insights/${lead.slug}/`)}">${inline(lead.h1, ctx)}</a></h2>
+      <p class="insight-lead__dek">${inline(lead.dek, ctx)}</p>
+      ${dateline(lead, { compact: true })}
+    </div>
+  </article>` : '';
+  const list = rest.length ? `<section class="insight-index" aria-labelledby="more-insights">
+    <h2 class="insight-index__title" id="more-insights">More from Insights</h2>
+    <ol class="insight-rows">
+      ${rest.map((a) => `<li class="insight-row" data-reveal>
+        <a class="insight-row__media" href="${ctx.url(`/insights/${a.slug}/`)}" tabindex="-1" aria-hidden="true">${cover(ctx, a)}</a>
+        <div class="insight-row__text">
+          <p class="insight-meta"><span class="insight-meta__topic">${esc(a.topic)}</span><span>${issue(a)}</span></p>
+          <h3 class="insight-row__title"><a href="${ctx.url(`/insights/${a.slug}/`)}">${inline(a.h1, ctx)}</a></h3>
+          <p class="insight-row__dek">${inline(a.dek, ctx)}</p>
+          ${dateline(a, { compact: true })}
+        </div>
+      </li>`).join('\n      ')}
+    </ol>
+  </section>` : '';
+  return `<div class="wrap insights">${leadHtml}${list}</div>`;
+}
+
+export function articlePage(ctx, { a, html, headings, related, work }) {
+  const toc = headings.filter((h) => h.level === 2);
+  const takeaways = (a.takeaways || []).length ? `<aside class="short-version" aria-labelledby="short-version-title"><p class="short-version__label" id="short-version-title">The short version</p><ul>${a.takeaways.map((t) => `<li>${inline(t, ctx)}</li>`).join('')}</ul></aside>` : '';
+  const workHtml = work.length ? `<section class="article-more__block" aria-labelledby="from-the-work">
+      <h2 class="article-more__title" id="from-the-work">From the work</h2>
+      <ul class="work-notes">
+        ${work.map(({ project: p, anchor, note }) => `<li class="work-note" style="${projectVars(p)}" data-reveal>
+          <p class="work-note__meta">${esc(p.industry)}${p.location ? ` · ${esc(p.location)}` : ''}</p>
+          <h3 class="work-note__name">${esc(p.name)}</h3>
+          <p class="work-note__text">${inline(note, ctx)}</p>
+          <p class="work-note__link">${button(ctx, 'Read the case study', `/work/${p.slug}/${anchor ? '#' + anchor : ''}`, 'project', ` aria-label="Read the ${attr(p.shortName)} case study"`)}</p>
+        </li>`).join('\n        ')}
+      </ul>
+    </section>` : '';
+  const relatedHtml = related.length ? `<section class="article-more__block" aria-labelledby="related-reading">
+      <h2 class="article-more__title" id="related-reading">Related reading</h2>
+      <ul class="related">
+        ${related.map((r) => `<li class="related__item" data-reveal>
+          <a class="related__media" href="${ctx.url(`/insights/${r.slug}/`)}" tabindex="-1" aria-hidden="true">${cover(ctx, r)}</a>
+          <p class="insight-meta"><span class="insight-meta__topic">${esc(r.topic)}</span><span>${issue(r)}</span></p>
+          <h3 class="related__title"><a href="${ctx.url(`/insights/${r.slug}/`)}">${inline(r.h1, ctx)}</a></h3>
+          <p class="related__dek">${inline(r.dek, ctx)}</p>
+        </li>`).join('\n        ')}
+      </ul>
+      <p class="related__all"><a class="text-link" href="${ctx.url('/insights/')}">All Insights</a></p>
+    </section>` : '';
+  return `<article class="article" aria-labelledby="article-title">
+  <header class="article-head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="${ctx.url('/')}">Home</a></li><li><a href="${ctx.url('/insights/')}">Insights</a></li><li><span aria-current="page">${esc(a.h1)}</span></li></ol></nav>
+      <p class="insight-meta"><span class="insight-meta__topic">${esc(a.topic)}</span><span>${issue(a)}</span></p>
+      <h1 class="article-head__title" id="article-title">${inline(a.h1, ctx)}</h1>
+      <p class="article-head__dek">${inline(a.dek, ctx)}</p>
+      ${dateline(a)}
+    </div>
+    <div class="wrap article-head__cover">${cover(ctx, a, { eager: true })}</div>
+  </header>
+  <div class="wrap article-body">
+    <nav class="case-toc article-toc" aria-label="In this article"><p class="case-toc__label">In this article</p><ol>${toc.map((h) => `<li><a href="#${h.id}">${esc(h.text.replace(/\*/g, ''))}</a></li>`).join('')}</ol></nav>
+    <div class="article-prose prose">${takeaways}${html}</div>
+  </div>
+  ${workHtml || relatedHtml ? `<div class="article-more"><div class="wrap article-more__inner">${workHtml}${relatedHtml}</div></div>` : ''}
 </article>`;
 }
