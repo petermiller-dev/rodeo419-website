@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a1b13"/><stop offset="0.32" stop-color="#6d4123"/>
+      <stop offset="0.52" stop-color="#c98543"/><stop offset="0.58" stop-color="#e9b26a"/>
+    </linearGradient>
+    <linearGradient id="dirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9a6436"/><stop offset=".45" stop-color="#5d3a20"/><stop offset="1" stop-color="#1d130d"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="768" cy="351" r="504" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff1cf" stop-opacity=".95"/><stop offset=".18" stop-color="#f6c77c" stop-opacity=".65"/><stop offset="1" stop-color="#f6c77c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lamp"><stop offset="0" stop-color="#ffe9b8" stop-opacity=".9"/><stop offset="1" stop-color="#ffe9b8" stop-opacity="0"/></radialGradient>
+    <linearGradient id="shadeL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#140e0a" stop-opacity=".55"/><stop offset=".55" stop-color="#140e0a" stop-opacity="0"/></linearGradient></defs><rect width="1200" height="675" fill="url(#sky)"/>
+    <rect width="1200" height="675" fill="url(#sun)"/>
+    <g opacity=".75"><rect x="141.6" y="161.99999999999997" width="4.8" height="202.5" fill="#2b1a10"/><rect x="122.4" y="153.89999999999998" width="43.199999999999996" height="13.5" fill="#3a2416"/><circle cx="144" cy="160.64999999999998" r="36" fill="url(#lamp)"/></g><g opacity=".75"><rect x="405.6000000000001" y="161.99999999999997" width="4.8" height="202.5" fill="#2b1a10"/><rect x="386.40000000000003" y="153.89999999999998" width="43.199999999999996" height="13.5" fill="#3a2416"/><circle cx="408.00000000000006" cy="160.64999999999998" r="36" fill="url(#lamp)"/></g><g opacity=".75"><rect x="1029.6" y="161.99999999999997" width="4.8" height="202.5" fill="#2b1a10"/><rect x="1010.4" y="153.89999999999998" width="43.199999999999996" height="13.5" fill="#3a2416"/><circle cx="1032" cy="160.64999999999998" r="36" fill="url(#lamp)"/></g>
+    <path d="M0 344.25 L336.00000000000006 324 L600 334.125 L744 364.5 L1200 337.5 L1200 391.5 L0 391.5 Z" fill="#3b2416" opacity=".9"/>
+    <rect y="391.5" width="1200" height="283.5" fill="url(#dirt)"/>
+    <ellipse cx="768" cy="405" rx="384" ry="23.625000000000004" fill="#f2c27a" opacity=".16"/>
+    <g fill="#1a110c" opacity=".9"><rect x="-109.1" y="425.3" width="7.2" height="108.0"/><rect x="0.0" y="425.3" width="7.2" height="108.0"/><rect x="109.1" y="425.3" width="7.2" height="108.0"/><rect x="218.2" y="425.3" width="7.2" height="108.0"/><rect x="327.3" y="425.3" width="7.2" height="108.0"/><rect x="436.4" y="425.3" width="7.2" height="108.0"/><rect x="545.5" y="425.3" width="7.2" height="108.0"/><rect x="654.5" y="425.3" width="7.2" height="108.0"/><rect x="763.6" y="425.3" width="7.2" height="108.0"/><rect x="872.7" y="425.3" width="7.2" height="108.0"/><rect x="981.8" y="425.3" width="7.2" height="108.0"/><rect x="1090.9" y="425.3" width="7.2" height="108.0"/><rect x="1200.0" y="425.3" width="7.2" height="108.0"/><rect x="1309.1" y="425.3" width="7.2" height="108.0"/></g>
+    <g stroke="#1a110c" stroke-width="4.7" opacity=".9">
+      <line x1="0" x2="1200" y1="438.75" y2="438.75"/>
+      <line x1="0" x2="1200" y1="472.5" y2="472.5"/>
+      <line x1="0" x2="1200" y1="506.25" y2="506.25"/>
+    </g>
+    <rect width="1200" height="675" fill="url(#shadeL)"/></svg>
