@@ -79,7 +79,7 @@ Open the Markdown file for the page, edit, rebuild (or just push).
 - **Photo:** a line with only `{{image: slot-id}}` places a photo slot; `{{band: slot-id}}` between sections places a full-width band.
 - **Screenshot** (case studies only): `{{shot: home-desktop}}`, using shot ids from `content/work.json`.
 - **Homepage:** the hero is in front matter. Body sections are marked `<!-- section: work -->`, `build`, `capabilities`, `process`, `name`, `contact`. In `build` ("Custom-coded websites built to load fast"), the `## ` heading and first paragraph form the section head, each `### ` point becomes a column, and the closing paragraph of links sits above the inquiry button. The capability rows come from `services.md` and the process steps from `process.md`, so each is written once.
-- **Process page comparison:** everything after `<!-- section: platforms -->` in `process.md` is the WordPress/Wix/Lovable comparison shown below the six steps (it is not a step). Keep each answer's sources linked at its end, and re-check the HTTP Archive figures and their month before changing them.
+- **Process page closing section:** everything after `<!-- section: foundation -->` in `process.md` is "A better foundation", shown below the six steps (it is not a step). Start it with `## Heading {#foundation}`, an `Eyebrow:` line, the introduction, then one `### ` heading per point.
 
 ### Portfolio
 

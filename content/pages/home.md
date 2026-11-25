@@ -34,7 +34,7 @@ On this site, one small script (under 3 KB compressed) runs the phone menu and t
 
 The finished site is a folder of plain files: HTML, CSS, images, and that one script. Any host that serves static files can run it, and your domain points wherever the site lives.
 
-See how the content system works in the [Dr. Rainey case study](/work/dr-rainey/#built), or read [how this compares to WordPress, Wix, and Lovable](/process/#platforms).
+See how the content system works in the [Dr. Rainey case study](/work/dr-rainey/#built), or read [why a better foundation pays off over time](/process/#foundation).
 
 <!-- section: capabilities -->
 
